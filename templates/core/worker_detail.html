@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ worker.username }} - {{ worker.position }}</h1>
+  <p>{{ worker.first_name }} {{ worker.last_name }}</p>
+  <p><a href="mailto:{{ worker.email }}">{{ worker.email }}</a></p>
+  <hr>
+  <p>All tasks:</p>
+  {% if worker.tasks.all %}
+    <ul class="task-list">
+      {% for task in worker.tasks.all %}
+        <li>
+          {% if task.is_completed %}
+            ✅
+          {% elif task.past_deadline %}
+            <strong style="color: red">!</strong>
+          {% endif %}
+          <a href="{% url "core:task-detail" task.id %}">{{ task.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>{{ worker.first_name }} doesn't have any tasks</p>
+  {% endif %}
+{% endblock %}

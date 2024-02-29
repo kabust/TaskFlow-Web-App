@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ task.name }} {% if task.is_completed %} <span style="color: green">Done!</span> {% endif %}</h1>
+  <p>Priority: {{ task.priority }}</p>
+  <p class="text-mute">Finish until: {{ task.deadline }}
+    {% if task.past_deadline and not task.is_completed %}
+      <strong style="color: red">Task is past deadline for {{ task.past_deadline }} day{{ task.past_deadline | pluralize }}!</strong>
+    {% endif %}
+  </p>
+  <hr>
+  <p>{{ task.description }}</p>
+  <p><strong>Assignees:</strong></p>
+  {% for assignee in task.assignees.all %}
+    <a href="{% url "core:worker-detail" assignee.id %}"><p>{{ assignee.first_name }} {{ assignee.last_name }}</p></a>
+  {% endfor %}
+
+{% endblock %}

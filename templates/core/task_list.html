@@ -1,22 +1,45 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <table class="table">
-    <tr>
-      <th>Name</th>
-      <th>Deadline</th>
-      <th>Priority</th>
-      <th>Task type</th>
-      <th>Assignees</th>
-    </tr>
-    {% for task in task_list %}
+  <h1>Tasks</h1>
+  {% if task_list %}
+    <table class="table">
       <tr>
-        <td>{{ task.name }}</td>
-        <td>{{ task.deadline }}</td>
-        <td>{{ task.priority }}</td>
-        <td>{{ task.task_type }}</td>
-        <td>{{ task.assignees }}</td>
+        <th>Name</th>
+        <th>Deadline</th>
+        <th>Priority</th>
+        <th>Task type</th>
+        <th>Assignees</th>
       </tr>
-    {% endfor %}
-  </table>
+      {% for task in task_list %}
+        {% if task.is_completed %}
+        <tr class="text-muted">
+          <td>✅ <a href="{% url 'core:task-detail' task.id %}" class="text-muted">{{ task.name }}</a></td>
+          <td>{{ task.deadline }}</td>
+          <td>{{ task.priority }}</td>
+          <td>{{ task.task_type }}</td>
+          <td>
+          {% for assignee in task.assignees.all %}
+            <a href="{% url "core:worker-detail" assignee.id %}" class="text-muted">{{ assignee.first_name }}</a>
+          {% endfor %}
+          </td>
+        </tr>
+        {% else %}
+          <tr>
+            <td><a href="{% url 'core:task-detail' task.id %}">{{ task.name }}</a></td>
+            <td {% if task.past_deadline %} style="color: red" {% endif %}>{{ task.deadline }}</td>
+            <td>{{ task.priority }}</td>
+            <td>{{ task.task_type }}</td>
+            <td>
+            {% for assignee in task.assignees.all %}
+              <a href="{% url "core:worker-detail" assignee.id %}">{{ assignee.first_name }}</a>
+            {% endfor %}
+            </td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>There are no tasks yet</p>
+  {% endif %}
 {% endblock %}
