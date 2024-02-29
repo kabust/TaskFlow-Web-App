@@ -1,0 +1,512 @@
+[
+  {
+    "model": "core.tasktype",
+    "pk": 1,
+    "fields": {
+      "name": "Create"
+    }
+  },
+  {
+    "model": "core.tasktype",
+    "pk": 2,
+    "fields": {
+      "name": "Update"
+    }
+  },
+  {
+    "model": "core.tasktype",
+    "pk": 3,
+    "fields": {
+      "name": "Refactor"
+    }
+  },
+  {
+    "model": "core.tasktype",
+    "pk": 4,
+    "fields": {
+      "name": "Initial"
+    }
+  },
+  {
+    "model": "core.tasktype",
+    "pk": 5,
+    "fields": {
+      "name": "Discuss"
+    }
+  },
+  {
+    "model": "core.position",
+    "pk": 1,
+    "fields": {
+      "name": "Junior"
+    }
+  },
+  {
+    "model": "core.position",
+    "pk": 2,
+    "fields": {
+      "name": "Middle"
+    }
+  },
+  {
+    "model": "core.position",
+    "pk": 3,
+    "fields": {
+      "name": "Senior"
+    }
+  },
+  {
+    "model": "core.position",
+    "pk": 4,
+    "fields": {
+      "name": "Trainee"
+    }
+  },
+  {
+    "model": "core.position",
+    "pk": 5,
+    "fields": {
+      "name": "Team Lead"
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "luella.moses",
+      "first_name": "Luella",
+      "last_name": "Moses",
+      "email": "luella_moses@it-manager.com",
+      "position": "Trainee",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "kahlil.roy",
+      "first_name": "Kahlil",
+      "last_name": "Roy",
+      "email": "kahlil_roy@it-manager.com",
+      "position": "Middle",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "kahlil.walter",
+      "first_name": "Kahlil",
+      "last_name": "Walter",
+      "email": "kahlil_walter@it-manager.com",
+      "position": "Middle",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "kourtney.roy",
+      "first_name": "Kourtney",
+      "last_name": "Roy",
+      "email": "kourtney_roy@it-manager.com",
+      "position": "Trainee",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "adalee.jeffers",
+      "first_name": "Adalee",
+      "last_name": "Jeffers",
+      "email": "adalee_jeffers@it-manager.com",
+      "position": "Middle",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "kourtney.mccloud",
+      "first_name": "Kourtney",
+      "last_name": "Mccloud",
+      "email": "kourtney_mccloud@it-manager.com",
+      "position": "Trainee",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 7,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "jamya.walter",
+      "first_name": "Jamya",
+      "last_name": "Walter",
+      "email": "jamya_walter@it-manager.com",
+      "position": "Middle",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 8,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "antony.buck",
+      "first_name": "Antony",
+      "last_name": "Buck",
+      "email": "antony_buck@it-manager.com",
+      "position": "Team Lead",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 9,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "kourtney.roy",
+      "first_name": "Kourtney",
+      "last_name": "Roy",
+      "email": "kourtney_roy@it-manager.com",
+      "position": "Trainee",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 10,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "antony.roy",
+      "first_name": "Antony",
+      "last_name": "Roy",
+      "email": "antony_roy@it-manager.com",
+      "position": "Middle",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 11,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "lillianna.lujan",
+      "first_name": "Lillianna",
+      "last_name": "Lujan",
+      "email": "lillianna_lujan@it-manager.com",
+      "position": "Junior",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 12,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "lillianna.fisher",
+      "first_name": "Lillianna",
+      "last_name": "Fisher",
+      "email": "lillianna_fisher@it-manager.com",
+      "position": "Trainee",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 13,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "jamya.jeffers",
+      "first_name": "Jamya",
+      "last_name": "Jeffers",
+      "email": "jamya_jeffers@it-manager.com",
+      "position": "Senior",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 14,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "macy.lujan",
+      "first_name": "Macy",
+      "last_name": "Lujan",
+      "email": "macy_lujan@it-manager.com",
+      "position": "Senior",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 15,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "lillianna.fisher",
+      "first_name": "Lillianna",
+      "last_name": "Fisher",
+      "email": "lillianna_fisher@it-manager.com",
+      "position": "Junior",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+  {
+    "model": "core.task",
+    "pk": 1,
+    "fields": {
+      "name": "Verify work",
+      "description": "Some interesting task description",
+      "deadline": "2024-03-05",
+      "is_completed": true,
+      "priority": "HIG",
+      "task_type": 2,
+      "assignees": [
+        10,
+        13
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 2,
+    "fields": {
+      "name": "Write documentation",
+      "description": "Some interesting task description",
+      "deadline": "2024-04-01",
+      "is_completed": true,
+      "priority": "MED",
+      "task_type": 1,
+      "assignees": [
+        10,
+        13
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 3,
+    "fields": {
+      "name": "Verify work",
+      "description": "Some interesting task description",
+      "deadline": "2024-04-01",
+      "is_completed": true,
+      "priority": "MED",
+      "task_type": 2,
+      "assignees": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 4,
+    "fields": {
+      "name": "Create logo",
+      "description": "Some interesting task description",
+      "deadline": "2024-03-10",
+      "is_completed": false,
+      "priority": "HIG",
+      "task_type": 5,
+      "assignees": [
+        2,
+        1
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 5,
+    "fields": {
+      "name": "Write documentation",
+      "description": "Some interesting task description",
+      "deadline": "2024-04-01",
+      "is_completed": true,
+      "priority": "LOW",
+      "task_type": 4,
+      "assignees": [
+        6,
+        4
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 6,
+    "fields": {
+      "name": "Fix bug",
+      "description": "Some interesting task description",
+      "deadline": "2024-03-15",
+      "is_completed": true,
+      "priority": "LOW",
+      "task_type": 2,
+      "assignees": [
+        10
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 7,
+    "fields": {
+      "name": "Create logo",
+      "description": "Some interesting task description",
+      "deadline": "2024-02-28",
+      "is_completed": false,
+      "priority": "URG",
+      "task_type": 2,
+      "assignees": [
+        11
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 8,
+    "fields": {
+      "name": "Fix bug",
+      "description": "Some interesting task description",
+      "deadline": "2024-03-05",
+      "is_completed": false,
+      "priority": "URG",
+      "task_type": 3,
+      "assignees": [
+        6,
+        4
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 9,
+    "fields": {
+      "name": "Verify work",
+      "description": "Some interesting task description",
+      "deadline": "2024-03-15",
+      "is_completed": true,
+      "priority": "HIG",
+      "task_type": 2,
+      "assignees": [
+        10
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 10,
+    "fields": {
+      "name": "Fix bug",
+      "description": "Some interesting task description",
+      "deadline": "2024-03-05",
+      "is_completed": true,
+      "priority": "MED",
+      "task_type": 1,
+      "assignees": [
+        1
+      ]
+    }
+  }
+]
