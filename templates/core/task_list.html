@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Deadline</th>
+      <th>Priority</th>
+      <th>Task type</th>
+      <th>Assignees</th>
+    </tr>
+    {% for task in task_list %}
+      <tr>
+        <td>{{ task.name }}</td>
+        <td>{{ task.deadline }}</td>
+        <td>{{ task.priority }}</td>
+        <td>{{ task.task_type }}</td>
+        <td>{{ task.assignees }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

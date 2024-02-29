@@ -28,6 +28,10 @@ class WorkerAdmin(UserAdmin):
     )
 
 
+@admin.register(Task)
+class TaskAdmin(admin.ModelAdmin):
+    list_display = ("name", "deadline", "is_completed", "task_type")
+
+
 admin.site.register(TaskType)
-admin.site.register(Task)
 admin.site.register(Position)

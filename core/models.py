@@ -12,10 +12,10 @@ class TaskType(models.Model):
 
 class Task(models.Model):
     priorities = [
-        ("URG", "Urgent"),
-        ("HIG", "High"),
-        ("MED", "Medium"),
-        ("LOW", "Low")
+        ("Urgent", "Urgent"),
+        ("High", "High"),
+        ("Medium", "Medium"),
+        ("Low", "Low")
     ]
 
     name = models.CharField(max_length=255)
@@ -30,7 +30,7 @@ class Task(models.Model):
         ordering = ("deadline",)
 
     def __str__(self):
-        return f"{self.name} ({self.priority} / finish before {self.deadline})"
+        return f"{self.name} ({str(self.priority)} / finish before {self.deadline})"
 
 
 class Position(models.Model):
