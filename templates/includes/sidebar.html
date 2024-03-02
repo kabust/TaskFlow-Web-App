@@ -1,6 +1,7 @@
 <ul class="sidebar-nav list-group">
   {% if user.is_authenticated %}
-    <li class="list-group-item">User: <a href="{% url "core:worker-detail" user.id %}">{{ user.get_username }}</a>
+    <li class="list-group-item with-logout">
+      <span>User: <a href="{% url "core:worker-detail" user.id %}">{{ user.get_username }}</a></span>
       {% include "includes/logout_button.html" %}
     </li>
   {% else %}

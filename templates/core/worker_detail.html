@@ -1,24 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>{{ worker.username }} - {{ worker.position }}</h1>
+  <h1>{{ worker.username }} - {{ worker.position }}
+    {% if request.user.id == worker.id %}
+      <a href="{% url "core:worker-update" request.user.id %}" class="btn btn-dark" style="float: right">Edit profile</a>
+    {% endif %}
+  </h1>
   <p>{{ worker.first_name }} {{ worker.last_name }}</p>
   <p><a href="mailto:{{ worker.email }}">{{ worker.email }}</a></p>
   <hr>
   <p>All tasks:</p>
   {% if worker.tasks.all %}
-    <ul class="task-list">
+    <table>
       {% for task in worker.tasks.all %}
-        <li>
-          {% if task.is_completed %}
-            ✅
-          {% elif task.past_deadline %}
-            <strong style="color: red">!</strong>
-          {% endif %}
-          <a href="{% url "core:task-detail" task.id %}">{{ task.name }}</a>
-        </li>
+        <tr>
+          <th>
+            {% if task.is_completed %}
+              ✅
+            {% elif task.past_deadline %}
+              <strong style="color: red">!</strong>
+            {% endif %}
+          </th>
+          <th>
+            <a href="{% url "core:task-detail" task.id %}">{{ task.name }}</a>
+          </th>
+        </tr>
       {% endfor %}
-    </ul>
+    </table>
   {% else %}
     <p>{{ worker.first_name }} doesn't have any tasks</p>
   {% endif %}

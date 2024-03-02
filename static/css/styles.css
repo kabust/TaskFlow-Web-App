@@ -6,3 +6,33 @@ body {
     padding: 0;
     list-style: none;
 }
+
+.task-done {
+    color: #b1b1b1;
+}
+
+.task-done:hover {
+    color: #8d8d8d;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-inline {
+    gap: 10px;
+}
+
+.flex-container .form-inline label {
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+}
+
+.with-logout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

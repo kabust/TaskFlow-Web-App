@@ -2,45 +2,45 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-  <h1>Tasks</h1>
-  <form action="" method="get" class="form-inline">
-    {{ filters }}
-    <input type="submit" value="&#x1F50E;&#xFE0E;" class="btn btn-light">
-  </form>
+  <div class="flex-container">
+    <h1>Tasks <a href="{% url "core:task-create" %}" class="btn btn-primary">New task</a></h1>
+    <form action="" method="get" class="form-inline">
+      <input type="submit" value="&#x1F50E;&#xFE0E;" class="btn btn-light">
+      {{ filters }}
+    </form>
+  </div>
   <br>
   {% if task_list %}
     <table class="table">
       <tr>
         <th>Name</th>
         <th>Deadline</th>
-        <th>Priority</th>
-        <th>Task type</th>
         <th>Assignees</th>
+        <th>Update</th>
+        <th>Delete</th>
       </tr>
       {% for task in task_list %}
         {% if task.is_completed %}
-        <tr class="text-muted">
-          <td>✅ <a href="{% url 'core:task-detail' task.id %}" class="text-muted">{{ task.name }}</a></td>
+        <tr class="task-done">
+          <td>✅ <a href="{% url 'core:task-detail' task.id %}" class="task-done">{{ task.name }}</a></td>
           <td>{{ task.deadline }}</td>
-          <td>{{ task.priority }}</td>
-          <td>{{ task.task_type }}</td>
           <td>
           {% for assignee in task.assignees.all %}
-            <a href="{% url "core:worker-detail" assignee.id %}" class="text-muted">{{ assignee.first_name }}</a>
+            <a href="{% url "core:worker-detail" assignee.id %}" class="task-done">{{ assignee.first_name }}</a>
           {% endfor %}
-          </td>
+          <td><a href="{% url "core:task-update" task.id %}" class="btn btn-secondary">Update</a></td>
+          <td><a href="{% url "core:task-delete" task.id %}" class="btn btn-danger">Delete</a></td>
         </tr>
         {% else %}
           <tr>
             <td><a href="{% url 'core:task-detail' task.id %}">{{ task.name }}</a></td>
             <td {% if task.past_deadline %} style="color: red" {% endif %}>{{ task.deadline }}</td>
-            <td>{{ task.priority }}</td>
-            <td>{{ task.task_type }}</td>
             <td>
             {% for assignee in task.assignees.all %}
               <a href="{% url "core:worker-detail" assignee.id %}">{{ assignee.first_name }}</a>
             {% endfor %}
-            </td>
+            <td><a href="{% url "core:task-update" task.id %}" class="btn btn-secondary">Update</a></td>
+            <td><a href="{% url "core:task-delete" task.id %}" class="btn btn-danger">Delete</a></td>
           </tr>
         {% endif %}
       {% endfor %}
