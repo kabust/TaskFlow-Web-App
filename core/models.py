@@ -24,6 +24,22 @@ class Worker(AbstractUser):
         ordering = ("username",)
 
 
+class Project(models.Model):
+    name = models.CharField(max_length=255)
+    project_manager = models.OneToOneField(
+        to=get_user_model(),
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+    workers = models.ManyToManyField(
+        to=get_user_model(),
+        related_name="projects"
+    )
+
+    def __str__(self):
+        return self.name
+
+
 class TaskType(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
@@ -42,6 +58,11 @@ class Task(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     deadline = models.DateField()
+    project = models.ForeignKey(
+        to=Project,
+        on_delete=models.PROTECT,
+        null=True
+    )
     is_completed = models.BooleanField(blank=True, default=False)
     priority = models.CharField(
         max_length=255,

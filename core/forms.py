@@ -19,12 +19,20 @@ class WorkerCreateForm(UserCreationForm):
 
 
 class WorkerUpdateForm(UserChangeForm):
-    first_name = forms.CharField(max_length=255, required=True)
-    last_name = forms.CharField(max_length=255, required=True)
+    username = forms.CharField(max_length=255, disabled=True, required=False)
+    date_joined = forms.DateTimeField(disabled=True, required=False)
+    password = forms.CharField(disabled=True, required=False, initial="********")
 
     class Meta(UserChangeForm.Meta):
         model = get_user_model()
-        fields = "__all__"
+        fields = (
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "date_joined",
+            "password"
+        )
 
 
 class TaskForm(forms.ModelForm):
@@ -56,8 +64,8 @@ class TaskFiltersSearch(forms.Form):
     filters = forms.MultipleChoiceField(
         choices=[
             ("past_dl", "❗Past deadline"),
-            ("done", "✅Done"),
-            ("urgent", "⚡Urgent")
+            ("urgent", "⚡Urgent"),
+            ("done", "✅Finished"),
         ],
         label="",
         widget=forms.CheckboxSelectMultiple

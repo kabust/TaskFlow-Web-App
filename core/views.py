@@ -3,7 +3,7 @@ from datetime import date
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
@@ -15,7 +15,7 @@ from core.forms import (
     WorkerCreateForm,
     WorkerUpdateForm
 )
-from core.models import Worker, Task
+from core.models import Worker, Task, Project
 
 
 def index(request: HttpRequest) -> HttpResponse:
@@ -44,11 +44,14 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
         if "past_dl" in filters:
             queryset = queryset.filter(deadline__lt=date.today())
 
+        if "urgent" in filters:
+            queryset = queryset.filter(priority="Urgent")
+
         if "done" in filters:
             queryset = queryset.filter(is_completed=True)
 
-        if "urgent" in filters:
-            queryset = queryset.filter(priority="Urgent")
+        else:
+            queryset = queryset.filter(is_completed=False)
 
         return queryset
 
@@ -100,6 +103,18 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
         return context
 
 
+def toggle_completed(request: HttpRequest, pk) -> HttpResponseRedirect | HttpResponse:
+    task = Task.objects.get(pk=pk)
+
+    if request.user in task.assignees.all():
+        task.is_completed = not task.is_completed
+        task.save()
+    else:
+        return HttpResponse("Not authorized", status=405)
+
+    return HttpResponseRedirect(reverse("core:task-detail", args=(pk,)))
+
+
 class WorkerListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
@@ -132,6 +147,12 @@ class WorkerCreateView(generic.CreateView):
     form_class = WorkerCreateForm
     success_url = reverse_lazy("core:index")
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["previous_url"] = self.request.META.get("HTTP_REFERER")
+        return context
+
 
 class WorkerUpdateView(generic.UpdateView):
     form_class = WorkerUpdateForm
@@ -143,3 +164,13 @@ class WorkerUpdateView(generic.UpdateView):
     def get_success_url(self):
         pk = self.request.user.pk
         return reverse("core:worker-detail", args=(pk,))
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["previous_url"] = self.request.META.get("HTTP_REFERER")
+        return context
+
+
+class ProjectListView(generic.ListView):
+    queryset = Project.objects.prefetch_related("workers")

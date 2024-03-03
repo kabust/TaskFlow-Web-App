@@ -26,7 +26,9 @@
           <td>{{ task.deadline }}</td>
           <td>
           {% for assignee in task.assignees.all %}
-            <a href="{% url "core:worker-detail" assignee.id %}" class="task-done">{{ assignee.first_name }}</a>
+            <a href="{% url "core:worker-detail" assignee.id %}" class="task-done worker-circle">
+              {{ assignee.first_name|slice:"1" }}{{ assignee.last_name|slice:"1" }}
+            </a>
           {% endfor %}
           <td><a href="{% url "core:task-update" task.id %}" class="btn btn-secondary">Update</a></td>
           <td><a href="{% url "core:task-delete" task.id %}" class="btn btn-danger">Delete</a></td>
@@ -37,7 +39,9 @@
             <td {% if task.past_deadline %} style="color: red" {% endif %}>{{ task.deadline }}</td>
             <td>
             {% for assignee in task.assignees.all %}
-              <a href="{% url "core:worker-detail" assignee.id %}">{{ assignee.first_name }}</a>
+              <a href="{% url "core:worker-detail" assignee.id %}" class="btn btn-light btn-circle btn-xl">
+                {{ assignee.first_name|slice:"1" }}{{ assignee.last_name|slice:"1" }}
+              </a>
             {% endfor %}
             <td><a href="{% url "core:task-update" task.id %}" class="btn btn-secondary">Update</a></td>
             <td><a href="{% url "core:task-delete" task.id %}" class="btn btn-danger">Delete</a></td>

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>{{ task.name }} {% if task.is_completed %} <span style="color: green">Done!</span> {% endif %}</h1>
+  <h1>{{ task.name }} {% if task.is_completed %} ✅ {% endif %}</h1>
   <p>Priority: {{ task.priority }}</p>
   <p class="text-mute">Finish until: {{ task.deadline }}
     {% if task.past_deadline and not task.is_completed %}
@@ -14,5 +14,17 @@
   {% for assignee in task.assignees.all %}
     <a href="{% url "core:worker-detail" assignee.id %}"><p>{{ assignee.first_name }} {{ assignee.last_name }}</p></a>
   {% endfor %}
+  <br>
+  {% if request.user in task.assignees.all %}
+    <a href="{% url "core:task-toggle-completed" task.id %}"
+    {% if not task.is_completed %}
+       class="btn btn-primary">
+      Mark as completed
+    {% else %}
+      class="btn btn-light">
+      Mark as uncompleted
+    {% endif %}
+    </a>
+  {% endif %}
 
 {% endblock %}

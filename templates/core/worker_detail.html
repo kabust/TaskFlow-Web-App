@@ -14,16 +14,16 @@
     <table>
       {% for task in worker.tasks.all %}
         <tr>
-          <th>
+          <td>
             {% if task.is_completed %}
               ✅
             {% elif task.past_deadline %}
               <strong style="color: red">!</strong>
             {% endif %}
-          </th>
-          <th>
+          </td>
+          <td>
             <a href="{% url "core:task-detail" task.id %}">{{ task.name }}</a>
-          </th>
+          </td>
         </tr>
       {% endfor %}
     </table>
