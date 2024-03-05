@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 
+{% block header %}
+  <p>Projects</p>
+{% endblock %}
+
 {% block content %}
-  <h1>Projects</h1>
   <table class="table">
     <tr>
       <th>Name</th>
@@ -10,7 +13,7 @@
     </tr>
     {% for project in project_list %}
       <tr>
-        <td><a href="">{{ project }}</a>
+        <td><a href="{% url "core:task-list" %}?project={{ project.id }}">{{ project }}</a>
           {% if request.user in project.workers.all %}
             (My project)
           {% endif %}

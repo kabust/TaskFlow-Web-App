@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
 
-{% block content %}
-  <h1>{% if object %}Update task{% else %}Create new task{% endif %}</h1>
+{% block header %}
+  <p>{% if object %}Update task{% else %}Create new task{% endif %}</p>
+{% endblock %}
 
+{% block content %}
   <form action="" method="post" novalidate>
     {% csrf_token %}
     {{ form|crispy }}

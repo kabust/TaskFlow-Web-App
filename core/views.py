@@ -35,23 +35,26 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
     def get_queryset(self):
-        queryset = Task.objects.select_related(
-            "task_type"
-        ).prefetch_related("assignees")
+        queryset = Task.objects.prefetch_related("assignees")
+
+        project = self.request.GET.get("project")
+
+        if project:
+            queryset.filter(project_id=project)
 
         filters = self.request.GET.getlist("filters")
 
-        if "past_dl" in filters:
-            queryset = queryset.filter(deadline__lt=date.today())
+        if filters:
+            if "past_dl" in filters:
+                queryset = queryset.filter(deadline__lt=date.today())
 
-        if "urgent" in filters:
-            queryset = queryset.filter(priority="Urgent")
+            if "urgent" in filters:
+                queryset = queryset.filter(priority="Urgent")
 
-        if "done" in filters:
-            queryset = queryset.filter(is_completed=True)
-
-        else:
-            queryset = queryset.filter(is_completed=False)
+            if "done" in filters:
+                queryset = queryset.filter(is_completed=True)
+            else:
+                queryset = queryset.filter(is_completed=False)
 
         return queryset
 
@@ -133,6 +136,8 @@ class WorkerListView(LoginRequiredMixin, generic.ListView):
 
         name = self.request.GET.get("name", "")
         context["search_form"] = WorkerNameSearch(initial={"name": name})
+
+        context["num_workers"] = get_user_model().objects.count()
 
         return context
 

@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block header %}
+  <p>Task deletion</p>
+{% endblock %}
+
 {% block content %}
   <h1>Delete task #{{ task.id }}</h1>
   <p>Are you sure you want to delete task <strong>{{ task }}</strong>?</p>

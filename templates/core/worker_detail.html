@@ -1,33 +1,37 @@
 {% extends "base.html" %}
 
+{% block header %}
+  <p>{{ worker.username }} - {{ worker.position }}</p>
+{% endblock %}
+
 {% block content %}
-  <h1>{{ worker.username }} - {{ worker.position }}
+  <div class="user-profile-content">
+    <div class="user-profile-info">
+      <p>{{ worker.first_name }} {{ worker.last_name }}</p>
+      <p><a href="mailto:{{ worker.email }}">{{ worker.email }}</a></p>
+      <hr>
+      <p>All tasks:</p>
+      {% if worker.tasks.all %}
+        {% for task in worker.tasks.all %}
+              <a href="{% url "core:task-detail" task.id %}"
+                {% if task.is_completed %}
+                  style="color: green"
+                {% elif task.past_deadline %}
+                  style="color: red"
+                {% endif %}>
+                {{ task.name }}
+              </a>
+          <br>
+        {% endfor %}
+      {% else %}
+        <p>{{ worker.first_name }} doesn't have any tasks</p>
+      {% endif %}
+    </div>
     {% if request.user.id == worker.id %}
-      <a href="{% url "core:worker-update" request.user.id %}" class="btn btn-dark" style="float: right">Edit profile</a>
+      <div class="user-profile-settings">
+        <a href="{% url "core:worker-update" request.user.id %}" class="btn btn-dark">Edit profile</a>
+        {% include "includes/logout_button.html" %}
+      </div>
     {% endif %}
-  </h1>
-  <p>{{ worker.first_name }} {{ worker.last_name }}</p>
-  <p><a href="mailto:{{ worker.email }}">{{ worker.email }}</a></p>
-  <hr>
-  <p>All tasks:</p>
-  {% if worker.tasks.all %}
-    <table>
-      {% for task in worker.tasks.all %}
-        <tr>
-          <td>
-            {% if task.is_completed %}
-              ✅
-            {% elif task.past_deadline %}
-              <strong style="color: red">!</strong>
-            {% endif %}
-          </td>
-          <td>
-            <a href="{% url "core:task-detail" task.id %}">{{ task.name }}</a>
-          </td>
-        </tr>
-      {% endfor %}
-    </table>
-  {% else %}
-    <p>{{ worker.first_name }} doesn't have any tasks</p>
-  {% endif %}
+  </div>
 {% endblock %}

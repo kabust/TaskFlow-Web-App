@@ -63,9 +63,9 @@ class WorkerNameSearch(forms.Form):
 class TaskFiltersSearch(forms.Form):
     filters = forms.MultipleChoiceField(
         choices=[
-            ("past_dl", "❗Past deadline"),
-            ("urgent", "⚡Urgent"),
-            ("done", "✅Finished"),
+            ("past_dl", "Past deadline❗"),
+            ("urgent", "Urgent⚡"),
+            ("done", "Finished✅"),
         ],
         label="",
         widget=forms.CheckboxSelectMultiple

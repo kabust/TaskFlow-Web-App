@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
 
+{% block header %}
+  <p>Login</p>
+{% endblock %}
+
 {% block content %}
 
   {% if form.errors %}

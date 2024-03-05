@@ -1,13 +1,17 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
 
+{% block header %}
+  <p>Tasks</p>
+{% endblock %}
+
 {% block content %}
   <div class="flex-container">
-    <h1>Tasks <a href="{% url "core:task-create" %}" class="btn btn-primary">New task</a></h1>
     <form action="" method="get" class="form-inline">
-      <input type="submit" value="&#x1F50E;&#xFE0E;" class="btn btn-light">
       {{ filters }}
+      <input type="submit" value="&#x1F50E;&#xFE0E;" class="btn btn-light">
     </form>
+    <a href="{% url "core:task-create" %}" class="btn btn-primary">New task</a>
   </div>
   <br>
   {% if task_list %}
@@ -26,7 +30,7 @@
           <td>{{ task.deadline }}</td>
           <td>
           {% for assignee in task.assignees.all %}
-            <a href="{% url "core:worker-detail" assignee.id %}" class="task-done worker-circle">
+            <a href="{% url "core:worker-detail" assignee.id %}" class="btn btn-light btn-circle btn-xl">
               {{ assignee.first_name|slice:"1" }}{{ assignee.last_name|slice:"1" }}
             </a>
           {% endfor %}

@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block header %}
+  <p>Task "{{ task.name }}"</p>
+{% endblock %}
+
 {% block content %}
   <h1>{{ task.name }} {% if task.is_completed %} ✅ {% endif %}</h1>
   <p>Priority: {{ task.priority }}</p>

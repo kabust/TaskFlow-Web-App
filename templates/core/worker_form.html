@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
 
+{% block header %}
+  <p>{% if object %} Edit your profile {% else %} Registration {% endif %}</p>
+{% endblock %}
+
 {% block content %}
-  <h1>{% if object %} Edit your profile {% else %} Registration {% endif %}</h1>
   <form action="" method="post" novalidate>
     {% csrf_token %}
     {{ form|crispy }}
