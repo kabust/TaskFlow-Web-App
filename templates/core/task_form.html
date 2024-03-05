@@ -10,7 +10,7 @@
     {% csrf_token %}
     {{ form|crispy }}
     <input type="submit" value="Submit" class="btn btn-primary">
-    <a href="{% if previous_url %} {{ previous_url }} {% else %} {% url "core:task-list" %} {% endif %}" class="btn btn-secondary">
+    <a href="{{ previous_url }}" class="btn btn-secondary">
       Cancel
     </a>
   </form>

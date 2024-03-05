@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 
-from core.models import Task
+from core.models import Task, Project
 
 
 class WorkerCreateForm(UserCreationForm):
@@ -11,11 +11,7 @@ class WorkerCreateForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
-        fields = UserCreationForm.Meta.fields + (
-            "first_name",
-            "last_name",
-            "email"
-        )
+        fields = UserCreationForm.Meta.fields + ("first_name", "last_name", "email")
 
 
 class WorkerUpdateForm(UserChangeForm):
@@ -31,7 +27,7 @@ class WorkerUpdateForm(UserChangeForm):
             "last_name",
             "email",
             "date_joined",
-            "password"
+            "password",
         )
 
 
@@ -41,12 +37,20 @@ class TaskForm(forms.ModelForm):
         widget=forms.CheckboxSelectMultiple,
     )
 
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super().__init__(*args, **kwargs)
+        users_project = self.request.user.project
+        self.fields["assignees"].queryset = get_user_model().objects.filter(
+            project=users_project
+        )
+        self.fields["project"].queryset = Project.objects.filter(worker=self.request.user)
+        self.fields["project"].disabled = True
+
     class Meta:
         model = Task
         exclude = ("is_completed",)
-        widgets = {
-            "deadline": forms.widgets.DateInput(attrs={'type': 'date'})
-        }
+        widgets = {"deadline": forms.widgets.DateInput(attrs={"type": "date"})}
 
 
 class WorkerNameSearch(forms.Form):
@@ -54,9 +58,7 @@ class WorkerNameSearch(forms.Form):
         max_length=255,
         required=False,
         label="",
-        widget=forms.TextInput(
-            attrs={"placeholder": "Search"}
-        )
+        widget=forms.TextInput(attrs={"placeholder": "Search"}),
     )
 
 
@@ -68,5 +70,5 @@ class TaskFiltersSearch(forms.Form):
             ("done", "Finished✅"),
         ],
         label="",
-        widget=forms.CheckboxSelectMultiple
+        widget=forms.CheckboxSelectMultiple,
     )

@@ -1,6 +1,7 @@
 from datetime import date
 
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
@@ -13,11 +14,12 @@ from core.forms import (
     TaskFiltersSearch,
     TaskForm,
     WorkerCreateForm,
-    WorkerUpdateForm
+    WorkerUpdateForm,
 )
 from core.models import Worker, Task, Project
 
 
+@login_required
 def index(request: HttpRequest) -> HttpResponse:
     workers_amount = Worker.objects.count()
     tasks_total_amount = Task.objects.count()
@@ -26,7 +28,7 @@ def index(request: HttpRequest) -> HttpResponse:
     context = {
         "workers_amount": workers_amount,
         "tasks_total_amount": tasks_total_amount,
-        "tasks_done": tasks_done
+        "tasks_done": tasks_done,
     }
     return render(request, "core/index.html", context)
 
@@ -36,33 +38,30 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         queryset = Task.objects.prefetch_related("assignees")
-
-        project = self.request.GET.get("project")
-
-        if project:
-            queryset.filter(project_id=project)
-
+        project_id = self.request.build_absolute_uri().split("/")[4]
+        queryset = queryset.filter(project_id=project_id)
         filters = self.request.GET.getlist("filters")
 
-        if filters:
-            if "past_dl" in filters:
-                queryset = queryset.filter(deadline__lt=date.today())
+        if "past_dl" in filters:
+            queryset = queryset.filter(deadline__lt=date.today())
 
-            if "urgent" in filters:
-                queryset = queryset.filter(priority="Urgent")
+        if "urgent" in filters:
+            queryset = queryset.filter(priority="Urgent")
 
-            if "done" in filters:
-                queryset = queryset.filter(is_completed=True)
-            else:
-                queryset = queryset.filter(is_completed=False)
+        if "done" in filters:
+            queryset = queryset.filter(is_completed=True)
+        else:
+            queryset = queryset.filter(is_completed=False)
 
         return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        project_id = self.request.build_absolute_uri().split("/")[4]
 
         filters = self.request.GET.getlist("filters")
         context["filters"] = TaskFiltersSearch(initial={"filters": filters})
+        context["project"] = Project.objects.get(id=project_id)
 
         return context
 
@@ -74,19 +73,41 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
     form_class = TaskForm
-    success_url = reverse_lazy("core:task-list")
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-
         context["previous_url"] = self.request.META.get("HTTP_REFERER")
         return context
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["request"] = self.request
+        return kwargs
+
+    def get_success_url(self):
+        return reverse("core:task-list", args=(self.request.user.project.id,))
 
 
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
     form_class = TaskForm
-    success_url = reverse_lazy("core:task-list")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+
+        kwargs["request"] = self.request
+        return kwargs
+
+    def get(self, request, *args, **kwargs):
+        obj = super().get_object()
+
+        if obj.project != self.request.user.project:
+            return HttpResponse("Unauthorized", status=405)
+
+        return super().get(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse("core:task-list", args=(self.get_object().project.id,))
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -97,7 +118,17 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Task
-    success_url = reverse_lazy("core:task-list")
+
+    def get(self, request, *args, **kwargs):
+        obj = super().get_object()
+
+        if obj.project != self.request.user.project:
+            return HttpResponse("Unauthorized", status=405)
+
+        return super().get(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse("core:task-list", args=(self.get_object().project.id,))
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -113,7 +144,7 @@ def toggle_completed(request: HttpRequest, pk) -> HttpResponseRedirect | HttpRes
         task.is_completed = not task.is_completed
         task.save()
     else:
-        return HttpResponse("Not authorized", status=405)
+        return HttpResponse("Unauthorized", status=405)
 
     return HttpResponseRedirect(reverse("core:task-detail", args=(pk,)))
 
@@ -177,5 +208,11 @@ class WorkerUpdateView(generic.UpdateView):
         return context
 
 
-class ProjectListView(generic.ListView):
-    queryset = Project.objects.prefetch_related("workers")
+class ProjectListView(LoginRequiredMixin, generic.ListView):
+    model = Project
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["users_project"] = self.request.user.project.pk
+        return context

@@ -13,7 +13,7 @@
     {% endif %}
   </p>
   <hr>
-  <p>{{ task.description }}</p>
+  <p style="width: 50%">{{ task.description }}</p>
   <p><strong>Assignees:</strong></p>
   {% for assignee in task.assignees.all %}
     <a href="{% url "core:worker-detail" assignee.id %}"><p>{{ assignee.first_name }} {{ assignee.last_name }}</p></a>

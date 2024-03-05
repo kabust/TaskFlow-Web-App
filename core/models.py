@@ -14,10 +14,12 @@ class Position(models.Model):
 
 class Worker(AbstractUser):
     position = models.ForeignKey(
-        to=Position,
+        to=Position, on_delete=models.SET_NULL, null=True, blank=True
+    )
+    project = models.ForeignKey(
+        to="Project",
         on_delete=models.SET_NULL,
         null=True,
-        blank=True
     )
 
     class Meta:
@@ -26,15 +28,14 @@ class Worker(AbstractUser):
 
 class Project(models.Model):
     name = models.CharField(max_length=255)
-    project_manager = models.OneToOneField(
-        to=get_user_model(),
-        on_delete=models.SET_NULL,
-        null=True,
-    )
-    workers = models.ManyToManyField(
-        to=get_user_model(),
-        related_name="projects"
-    )
+
+    def get_project_managers(self):
+        return get_user_model().objects.filter(
+            project=self, position__name="Project Manager"
+        )
+
+    def get_all_workers(self):
+        return get_user_model().objects.filter(project=self)
 
     def __str__(self):
         return self.name
@@ -52,32 +53,21 @@ class Task(models.Model):
         ("Urgent", "Urgent"),
         ("High", "High"),
         ("Medium", "Medium"),
-        ("Low", "Low")
+        ("Low", "Low"),
     ]
 
     name = models.CharField(max_length=255)
     description = models.TextField()
     deadline = models.DateField()
     project = models.ForeignKey(
-        to=Project,
-        on_delete=models.PROTECT,
-        null=True
+        to=Project, on_delete=models.PROTECT, null=True, blank=True, default=1
     )
     is_completed = models.BooleanField(blank=True, default=False)
-    priority = models.CharField(
-        max_length=255,
-        choices=priorities
-    )
+    priority = models.CharField(max_length=255, choices=priorities)
     task_type = models.ForeignKey(
-        to=TaskType,
-        on_delete=models.SET_NULL,
-        null=True,
-        related_name="tasks"
+        to=TaskType, on_delete=models.SET_NULL, null=True, related_name="tasks"
     )
-    assignees = models.ManyToManyField(
-        to=get_user_model(),
-        related_name="tasks"
-    )
+    assignees = models.ManyToManyField(to=get_user_model(), related_name="tasks")
 
     def past_deadline(self):
         past = self.deadline - date.today()
@@ -89,5 +79,4 @@ class Task(models.Model):
         ordering = ("deadline",)
 
     def __str__(self):
-        return (f"{self.name} ({str(self.priority)} "
-                f"/ finish before {self.deadline})")
+        return f"{self.name} ({str(self.priority)} " f"/ finish before {self.deadline})"

@@ -2,7 +2,7 @@
 {% load crispy_forms_filters %}
 
 {% block header %}
-  <p>Tasks</p>
+  <p>Tasks in "{{ project }}"</p>
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,9 @@
       {{ filters }}
       <input type="submit" value="&#x1F50E;&#xFE0E;" class="btn btn-light">
     </form>
-    <a href="{% url "core:task-create" %}" class="btn btn-primary">New task</a>
+    {% if request.user in project.get_all_workers %}
+      <a href="{% url "core:task-create" %}" class="btn btn-primary">New task</a>
+    {% endif %}
   </div>
   <br>
   {% if task_list %}
@@ -47,8 +49,13 @@
                 {{ assignee.first_name|slice:"1" }}{{ assignee.last_name|slice:"1" }}
               </a>
             {% endfor %}
+          {% if request.user in task.project.get_all_workers %}
             <td><a href="{% url "core:task-update" task.id %}" class="btn btn-secondary">Update</a></td>
             <td><a href="{% url "core:task-delete" task.id %}" class="btn btn-danger">Delete</a></td>
+          {% else %}
+            <td><button type="button" class="btn btn-secondary" disabled>Update</button></td>
+            <td><button type="button" class="btn btn-danger" disabled>Delete</button></td>
+          {% endif %}
           </tr>
         {% endif %}
       {% endfor %}

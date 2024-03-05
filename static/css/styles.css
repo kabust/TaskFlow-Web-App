@@ -4,6 +4,14 @@ body {
     font-family: Inter, serif;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
+.h-100 {
+    height: auto !important;
+}
+
 .task-list {
     padding: 0;
     list-style: none;
@@ -84,7 +92,7 @@ html, body {
     gap: 12px;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
+    justify-content: left;
 }
 
 .login {
@@ -196,4 +204,14 @@ html, body {
     align-items: center;
     padding: 0 16px;
     border-radius: 16px;
+}
+
+.project-row {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 16px;
+    padding: 8px 16px;
+    border: #CBCBCB solid 1px;
+    border-radius: 16px;
+    gap: 56px;
 }
