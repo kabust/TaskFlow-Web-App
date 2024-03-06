@@ -193,6 +193,7 @@ html, body {
 
 .table tr td {
     width: 150px;
+    padding: 20px 10px;
 }
 
 .searchbar {
@@ -214,4 +215,10 @@ html, body {
     border: #CBCBCB solid 1px;
     border-radius: 16px;
     gap: 56px;
+}
+
+.name-with-go-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }

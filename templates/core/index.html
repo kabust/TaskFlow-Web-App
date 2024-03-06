@@ -8,7 +8,7 @@
   <h1>Welcome!</h1>
   <h3>Your current project: <a href="{% url "core:task-list" user.project.id %}">{{ user.project }}</a></h3>
   <hr>
-  <p>Amount of workers: {{ workers_amount }}</p>
-  <p>Amount of tasks (total): {{ tasks_total_amount }}</p>
-  <p>Amount of finished tasks: {{ tasks_done }}</p>
+  <p>You have {{ workers_amount }} colleagues working on this project</p>
+  <p>There are {{ tasks_total_amount }} tasks in total in your project</p>
+  <p>Your team finished {{ tasks_done }} task{{ tasks_done|pluralize }} so far</p>
 {% endblock %}

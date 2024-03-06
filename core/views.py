@@ -16,14 +16,14 @@ from core.forms import (
     WorkerCreateForm,
     WorkerUpdateForm,
 )
-from core.models import Worker, Task, Project
+from core.models import Task, Project
 
 
 @login_required
 def index(request: HttpRequest) -> HttpResponse:
-    workers_amount = Worker.objects.count()
-    tasks_total_amount = Task.objects.count()
-    tasks_done = Task.objects.filter(is_completed=True).count()
+    workers_amount = get_user_model().objects.filter(project=request.user.project).count()
+    tasks_total_amount = Task.objects.filter(project=request.user.project).count()
+    tasks_done = Task.objects.filter(is_completed=True, project=request.user.project).count()
 
     context = {
         "workers_amount": workers_amount,
@@ -68,6 +68,11 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["previous_url"] = self.request.META.get("HTTP_REFERER")
+        return context
 
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):

@@ -5,8 +5,10 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Delete task #{{ task.id }}</h1>
-  <p>Are you sure you want to delete task <strong>{{ task }}</strong>?</p>
+  <div style="margin-bottom: 48px">
+    <h1>Delete task #{{ task.id }}</h1>
+    <p>Are you sure you want to delete task <strong>{{ task }}</strong>?</p>
+  </div>
   <form action="" method="post">
     {% csrf_token %}
     <input type="submit" value="Yes, delete" class="btn btn-danger">
