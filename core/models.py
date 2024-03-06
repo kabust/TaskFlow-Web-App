@@ -59,9 +59,7 @@ class Task(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     deadline = models.DateField()
-    project = models.ForeignKey(
-        to=Project, on_delete=models.PROTECT, null=True, blank=True, default=1
-    )
+    project = models.ForeignKey(to=Project, on_delete=models.PROTECT, related_name="tasks")
     is_completed = models.BooleanField(blank=True, default=False)
     priority = models.CharField(max_length=255, choices=priorities)
     task_type = models.ForeignKey(

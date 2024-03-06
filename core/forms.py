@@ -35,6 +35,7 @@ class TaskForm(forms.ModelForm):
     assignees = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
         widget=forms.CheckboxSelectMultiple,
+
     )
 
     def __init__(self, *args, **kwargs):
@@ -44,7 +45,8 @@ class TaskForm(forms.ModelForm):
         self.fields["assignees"].queryset = get_user_model().objects.filter(
             project=users_project
         )
-        self.fields["project"].queryset = Project.objects.filter(worker=self.request.user)
+        self.fields["project"].required = True
+        self.fields["project"].initial = Project.objects.get(worker=self.request.user)
         self.fields["project"].disabled = True
 
     class Meta:
