@@ -1,8 +1,7 @@
-from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from core.forms import WorkerCreateForm, WorkerNameSearch, TaskForm, TaskFiltersSearch
-from core.models import Project, TaskType
+from core.forms import WorkerCreateForm, WorkerNameSearch, TaskFiltersSearch
+from core.models import Project
 
 
 class TestWorkerForms(TestCase):
@@ -16,7 +15,7 @@ class TestWorkerForms(TestCase):
             "password2": "Qwerty12345!",
             "project": self.project,
             "first_name": "tester",
-            "last_name": "bob"
+            "last_name": "bob",
         }
         form = WorkerCreateForm(form_data)
         self.assertTrue(form.is_valid())
@@ -38,8 +37,6 @@ class TestWorkerForms(TestCase):
 
 class TestTaskForms(TestCase):
     def test_task_filters_search(self):
-        form_data = {
-            "filters": ["past_dl", "urgent", "done"]
-        }
+        form_data = {"filters": ["past_dl", "urgent", "done"]}
         form = TaskFiltersSearch(data=form_data)
         self.assertTrue(form.is_valid())

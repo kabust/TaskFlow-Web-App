@@ -6,9 +6,7 @@ from .models import TaskType, Task, Worker, Position, Project, Comment
 
 @admin.register(Worker)
 class WorkerAdmin(UserAdmin):
-    list_display = UserAdmin.list_display + (
-        "position", "project"
-    )
+    list_display = UserAdmin.list_display + ("position", "project")
 
     fieldsets = UserAdmin.fieldsets + (
         (("Additional info", {"fields": ("position", "project")}),)

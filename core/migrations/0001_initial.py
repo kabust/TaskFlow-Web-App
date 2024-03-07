@@ -70,7 +70,8 @@ class Migration(migrations.Migration):
                     "is_superuser",
                     models.BooleanField(
                         default=False,
-                        help_text="Designates that this user has all permissions without explicitly assigning them.",
+                        help_text="Designates that this user has all "
+                        "permissions without explicitly assigning them.",
                         verbose_name="superuser status",
                     ),
                 ),
@@ -80,7 +81,8 @@ class Migration(migrations.Migration):
                         error_messages={
                             "unique": "A user with that username already exists."
                         },
-                        help_text="Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+                        help_text="Required. 150 characters or fewer. "
+                        "Letters, digits and @/./+/-/_ only.",
                         max_length=150,
                         unique=True,
                         validators=[

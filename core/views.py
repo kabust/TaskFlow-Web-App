@@ -15,16 +15,23 @@ from core.forms import (
     TaskFiltersSearch,
     TaskForm,
     WorkerCreateForm,
-    WorkerUpdateForm, CommentForm,
+    WorkerUpdateForm,
+    CommentForm,
 )
 from core.models import Task, Project, Comment
 
 
 @login_required
 def index(request: HttpRequest) -> HttpResponse:
-    workers_amount = get_user_model().objects.filter(project=request.user.project).count()
-    tasks_todo_amount = Task.objects.filter(project=request.user.project, is_completed=False).count()
-    tasks_done = Task.objects.filter(is_completed=True, project=request.user.project).count()
+    workers_amount = (
+        get_user_model().objects.filter(project=request.user.project).count()
+    )
+    tasks_todo_amount = Task.objects.filter(
+        project=request.user.project, is_completed=False
+    ).count()
+    tasks_done = Task.objects.filter(
+        is_completed=True, project=request.user.project
+    ).count()
     if request.user.date_joined.date() != date.today():
         daily_refresher = request.session.get("daily_refresher", None)
         if not daily_refresher:
@@ -37,7 +44,7 @@ def index(request: HttpRequest) -> HttpResponse:
         "workers_amount": workers_amount,
         "tasks_todo_amount": tasks_todo_amount,
         "tasks_done": tasks_done,
-        "daily_refresher": daily_refresher
+        "daily_refresher": daily_refresher,
     }
 
     return render(request, "core/index.html", context)
@@ -103,10 +110,13 @@ class TaskDetailView(FormMixin, generic.DetailView):
         return super().form_valid(form)
 
 
-def delete_comment(request: HttpRequest, task_pk: int, com_pk: int) -> HttpResponseRedirect | HttpResponse:
+def delete_comment(
+    request: HttpRequest, task_pk: int, com_pk: int
+) -> HttpResponseRedirect | HttpResponse:
     comment = Comment.objects.get(pk=com_pk)
     task_project = Task.objects.get(pk=task_pk).project
-    if request.user != comment.commentator or request.user.project != task_project:
+    if (request.user != comment.commentator or
+            request.user.project != task_project):
         return HttpResponse("Unauthorized", status=405)
     comment.delete()
     return HttpResponseRedirect(reverse("core:task-detail", args=(task_pk,)))
@@ -142,7 +152,8 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     def get(self, request, *args, **kwargs):
         obj = super().get_object()
 
-        if not self.request.user.project or obj.project != self.request.user.project:
+        if (not self.request.user.project or
+                obj.project != self.request.user.project):
             return HttpResponse("Unauthorized", status=405)
 
         return super().get(request, *args, **kwargs)
@@ -162,7 +173,8 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     def get(self, request, *args, **kwargs):
         obj = super().get_object()
 
-        if not self.request.user.project or obj.project != self.request.user.project:
+        if (not self.request.user.project or
+                obj.project != self.request.user.project):
             return HttpResponse("Unauthorized", status=405)
 
         return super().get(request, *args, **kwargs)
@@ -176,7 +188,9 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
         return context
 
 
-def toggle_completed(request: HttpRequest, pk) -> HttpResponseRedirect | HttpResponse:
+def toggle_completed(
+        request: HttpRequest, pk
+) -> HttpResponseRedirect | HttpResponse:
     task = Task.objects.get(pk=pk)
 
     if request.user in task.assignees.all():

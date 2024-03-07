@@ -23,14 +23,14 @@ class ProjectModelTest(TestCase):
                 username=f"worker{i}",
                 password="qwerty1234",
                 project=self.project,
-                position=position
+                position=position,
             )
 
         get_user_model().objects.create_user(
             username="project_manager",
             password="qwerty1234",
             project=self.project,
-            position=pm_position
+            position=pm_position,
         )
 
     def test_project_str(self):
@@ -39,15 +39,18 @@ class ProjectModelTest(TestCase):
     def test_get_project_managers(self):
         self.assertEqual(
             self.project.get_project_managers().first(),
-            get_user_model().objects.filter(
-                project=self.project, position__name="Project Manager"
-            ).first()
+            get_user_model()
+            .objects.filter(
+                project=self.project,
+                position__name="Project Manager"
+            )
+            .first(),
         )
 
     def test_get_all_workers(self):
         self.assertEqual(
             self.project.get_all_workers().count(),
-            get_user_model().objects.filter(project=self.project).count()
+            get_user_model().objects.filter(project=self.project).count(),
         )
 
 
@@ -60,11 +63,13 @@ class TaskTypeModelTest(TestCase):
 class TaskModelTest(TestCase):
     def setUp(self):
         position = Position.objects.create(name="QA")
+        project = Project.objects.create(name="Test project")
         for i in range(3):
             get_user_model().objects.create_user(
                 username=f"worker{i}",
                 password="qwerty1234",
-                position=position
+                position=position,
+                project=project
             )
 
         self.task = Task.objects.create(
@@ -72,17 +77,16 @@ class TaskModelTest(TestCase):
             description="Cool description",
             deadline=datetime.today().date(),
             priority="Urgent",
+            project=project
         )
         self.task.assignees.set(get_user_model().objects.all())
 
     def test_task_str(self):
         self.assertEqual(
             str(self.task),
-            f"{self.task.name} ({str(self.task.priority)} " f"/ finish before {self.task.deadline})"
+            f"{self.task.name} ({str(self.task.priority)} "
+            f"/ finish before {self.task.deadline})",
         )
 
     def test_past_deadline(self):
-        self.assertEqual(
-            self.task.past_deadline(),
-            0
-        )
+        self.assertEqual(self.task.past_deadline(), 0)

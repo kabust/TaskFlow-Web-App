@@ -15,16 +15,19 @@ class WorkerCreateForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
-        fields = UserCreationForm.Meta.fields + ("first_name", "last_name", "email", "project")
+        fields = UserCreationForm.Meta.fields + (
+            "first_name",
+            "last_name",
+            "email",
+            "project",
+        )
 
 
 class WorkerUpdateForm(UserChangeForm):
     username = forms.CharField(max_length=255, disabled=True, required=False)
     date_joined = forms.DateTimeField(disabled=True, required=False)
     password = forms.CharField(
-        disabled=True,
-        required=False,
-        widget=forms.HiddenInput()
+        disabled=True, required=False, widget=forms.HiddenInput()
     )
 
     class Meta(UserChangeForm.Meta):
@@ -54,7 +57,9 @@ class TaskForm(forms.ModelForm):
         )
         self.fields["assignees"].initial = self.instance
         self.fields["project"].required = True
-        self.fields["project"].initial = Project.objects.get(worker=self.request.user)
+        self.fields["project"].initial = Project.objects.get(
+            worker=self.request.user
+        )
         self.fields["project"].disabled = True
 
     class Meta:
@@ -88,4 +93,7 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ("content", "task", "commentator")
-        widgets = {"task": forms.HiddenInput(), "commentator": forms.HiddenInput()}
+        widgets = {
+            "task": forms.HiddenInput(),
+            "commentator": forms.HiddenInput()
+        }
