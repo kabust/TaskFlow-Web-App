@@ -65,14 +65,14 @@
     {% endfor %}
 
     <p><strong>Add a new comment</strong></p>
-    {% if user.is_authenticated %}
+    {% if user.project == task.project %}
       <form action="" method="post" class="comment-form" novalidate>
         {% csrf_token %}
         {{ form | crispy }}
         <input type="submit" value="Add comment" class="btn btn-dark">
       </form>
     {% else %}
-      <a href="{% url "login" %}">Login first</a>
+      <p>You cannot comment under other projects</p>
     {% endif %}
   </div>
 

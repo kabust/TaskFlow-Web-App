@@ -105,7 +105,8 @@ class TaskDetailView(FormMixin, generic.DetailView):
 
 def delete_comment(request: HttpRequest, task_pk: int, com_pk: int) -> HttpResponseRedirect | HttpResponse:
     comment = Comment.objects.get(pk=com_pk)
-    if request.user != comment.commentator:
+    task_project = Task.objects.get(pk=task_pk).project
+    if request.user != comment.commentator or request.user.project != task_project:
         return HttpResponse("Unauthorized", status=405)
     comment.delete()
     return HttpResponseRedirect(reverse("core:task-detail", args=(task_pk,)))
