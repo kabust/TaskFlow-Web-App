@@ -8,10 +8,14 @@ from core.models import Task, Project, Comment
 class WorkerCreateForm(UserCreationForm):
     first_name = forms.CharField(max_length=255, required=True)
     last_name = forms.CharField(max_length=255, required=True)
+    project = forms.ModelChoiceField(
+        queryset=Project.objects.all(),
+        required=True
+    )
 
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
-        fields = UserCreationForm.Meta.fields + ("first_name", "last_name", "email")
+        fields = UserCreationForm.Meta.fields + ("first_name", "last_name", "email", "project")
 
 
 class WorkerUpdateForm(UserChangeForm):
