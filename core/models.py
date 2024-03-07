@@ -20,6 +20,7 @@ class Worker(AbstractUser):
         to="Project",
         on_delete=models.SET_NULL,
         null=True,
+        blank=True
     )
 
     class Meta:
@@ -59,7 +60,7 @@ class Task(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     deadline = models.DateField()
-    project = models.ForeignKey(to=Project, on_delete=models.PROTECT, related_name="tasks")
+    project = models.ForeignKey(to=Project, on_delete=models.CASCADE, related_name="tasks")
     is_completed = models.BooleanField(blank=True, default=False)
     priority = models.CharField(max_length=255, choices=priorities)
     task_type = models.ForeignKey(
@@ -73,8 +74,26 @@ class Task(models.Model):
             return abs(past.days)
         return 0
 
+    def get_comments(self):
+        return Comment.objects.filter(task_id=self.id)
+
     class Meta:
         ordering = ("deadline",)
 
     def __str__(self):
         return f"{self.name} ({str(self.priority)} " f"/ finish before {self.deadline})"
+
+
+class Comment(models.Model):
+    commentator = models.ForeignKey(
+        get_user_model(), on_delete=models.CASCADE
+    )
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    created_time = models.DateTimeField(auto_now_add=True)
+    content = models.TextField()
+
+    def __str__(self):
+        return (
+            f"Comment by {self.commentator}:\n"
+            f"{self.content[:20]}"
+        )

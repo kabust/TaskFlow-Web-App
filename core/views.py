@@ -8,28 +8,38 @@ from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
+from django.views.generic.edit import FormMixin
 
 from core.forms import (
     WorkerNameSearch,
     TaskFiltersSearch,
     TaskForm,
     WorkerCreateForm,
-    WorkerUpdateForm,
+    WorkerUpdateForm, CommentForm,
 )
-from core.models import Task, Project
+from core.models import Task, Project, Comment
 
 
 @login_required
 def index(request: HttpRequest) -> HttpResponse:
     workers_amount = get_user_model().objects.filter(project=request.user.project).count()
-    tasks_total_amount = Task.objects.filter(project=request.user.project).count()
+    tasks_todo_amount = Task.objects.filter(project=request.user.project, is_completed=False).count()
     tasks_done = Task.objects.filter(is_completed=True, project=request.user.project).count()
+    if request.user.date_joined.date() != date.today():
+        daily_refresher = request.session.get("daily_refresher", None)
+        if not daily_refresher:
+            request.session["daily_refresher"] = 1
+        request.session.set_expiry(86400)
+    else:
+        daily_refresher = 1
 
     context = {
         "workers_amount": workers_amount,
-        "tasks_total_amount": tasks_total_amount,
+        "tasks_todo_amount": tasks_todo_amount,
         "tasks_done": tasks_done,
+        "daily_refresher": daily_refresher
     }
+
     return render(request, "core/index.html", context)
 
 
@@ -66,13 +76,39 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
         return context
 
 
-class TaskDetailView(LoginRequiredMixin, generic.DetailView):
+class TaskDetailView(FormMixin, generic.DetailView):
     model = Task
+    form_class = CommentForm
+
+    def get_success_url(self):
+        return reverse("core:task-detail", args=(self.object.id,))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["previous_url"] = self.request.META.get("HTTP_REFERER")
+        context["form"] = CommentForm(
+            initial={"task": self.object, "commentator": self.request.user}
+        )
         return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+
+def delete_comment(request: HttpRequest, task_pk: int, com_pk: int) -> HttpResponseRedirect | HttpResponse:
+    comment = Comment.objects.get(pk=com_pk)
+    if request.user != comment.commentator:
+        return HttpResponse("Unauthorized", status=405)
+    comment.delete()
+    return HttpResponseRedirect(reverse("core:task-detail", args=(task_pk,)))
 
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
@@ -99,14 +135,13 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-
         kwargs["request"] = self.request
         return kwargs
 
     def get(self, request, *args, **kwargs):
         obj = super().get_object()
 
-        if obj.project != self.request.user.project:
+        if not self.request.user.project or obj.project != self.request.user.project:
             return HttpResponse("Unauthorized", status=405)
 
         return super().get(request, *args, **kwargs)
@@ -116,7 +151,6 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-
         context["previous_url"] = self.request.META.get("HTTP_REFERER")
         return context
 
@@ -127,7 +161,7 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     def get(self, request, *args, **kwargs):
         obj = super().get_object()
 
-        if obj.project != self.request.user.project:
+        if not self.request.user.project or obj.project != self.request.user.project:
             return HttpResponse("Unauthorized", status=405)
 
         return super().get(request, *args, **kwargs)
@@ -137,7 +171,6 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-
         context["previous_url"] = self.request.META.get("HTTP_REFERER")
         return context
 
@@ -169,18 +202,20 @@ class WorkerListView(LoginRequiredMixin, generic.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-
         name = self.request.GET.get("name", "")
         context["search_form"] = WorkerNameSearch(initial={"name": name})
-
         context["num_workers"] = get_user_model().objects.count()
-
         return context
 
 
 class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     model = get_user_model()
     queryset = get_user_model().objects.prefetch_related("tasks")
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["previous_url"] = self.request.META.get("HTTP_REFERER")
+        return context
 
 
 class WorkerCreateView(generic.CreateView):
@@ -190,7 +225,6 @@ class WorkerCreateView(generic.CreateView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-
         context["previous_url"] = self.request.META.get("HTTP_REFERER")
         return context
 
@@ -208,7 +242,6 @@ class WorkerUpdateView(generic.UpdateView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-
         context["previous_url"] = self.request.META.get("HTTP_REFERER")
         return context
 
@@ -218,6 +251,6 @@ class ProjectListView(LoginRequiredMixin, generic.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        context["users_project"] = self.request.user.project.pk
+        if self.request.user.project:
+            context["users_project"] = self.request.user.project.pk
         return context

@@ -42,6 +42,18 @@ a:hover {
     gap: 6px;
 }
 
+.container-fluid .home {
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.container-fluid .home .line {
+    height: 100px;
+    border-left: black solid 1px;
+}
+
 #id_filters {
     display: flex;
     gap: 12px;
@@ -168,6 +180,7 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-height: 72px;
 }
 
 .row .header p {
@@ -194,6 +207,14 @@ html, body {
 .table tr td {
     width: 150px;
     padding: 20px 10px;
+}
+
+.comment-section {
+    margin-top: 50px;
+}
+
+.comment-form textarea {
+    height: 70px;
 }
 
 .searchbar {

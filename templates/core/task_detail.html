@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block header %}
   <div class="name-with-go-back">
@@ -15,7 +16,7 @@
 
 {% block content %}
   <h1>{{ task.name }} {% if task.is_completed %} ✅ {% endif %}</h1>
-  <p>Priority: {{ task.priority }}</p>
+  <p>{{ task.priority }} priority | {{ task.task_type }}</p>
   <p class="text-mute">Finish until: {{ task.deadline }}
     {% if task.past_deadline and not task.is_completed %}
       <strong style="color: red">Task is past deadline for {{ task.past_deadline }} day{{ task.past_deadline | pluralize }}!</strong>
@@ -25,7 +26,10 @@
   <p style="width: 50%">{{ task.description }}</p>
   <p><strong>Assignees:</strong></p>
   {% for assignee in task.assignees.all %}
-    <a href="{% url "core:worker-detail" assignee.id %}"><p>{{ assignee.first_name }} {{ assignee.last_name }}</p></a>
+    <a href="{% url "core:worker-detail" assignee.id %}" style="margin-bottom: 12px">
+      {{ assignee.first_name }} {{ assignee.last_name }}
+    </a>
+    <br>
   {% endfor %}
   <br>
   {% if request.user in task.assignees.all %}
@@ -39,5 +43,37 @@
     {% endif %}
     </a>
   {% endif %}
+  <div class="comment-section">
+    {% if not task.get_comments %}
+      <p>There are no comments yet.</p>
+    {% else %}
+      <p>{{ task.get_comments.count }} comment{{ task.get_comments.count | pluralize }}</p>
+    {% endif %}
+
+    {% for comment in task.get_comments %}
+      <div class="border card-body">
+        {{ comment.commentator }} <small class="text-muted">{{ comment.created_time }}</small>
+        {% if comment.commentator == user %} 
+          <a href="{% url "core:task-delete-comment" task.id comment.id %}" style="color: red">
+            Delete
+          </a> 
+        {% endif %}
+        <hr>
+        {{ comment.content }}
+      </div>
+      <br>
+    {% endfor %}
+
+    <p><strong>Add a new comment</strong></p>
+    {% if user.is_authenticated %}
+      <form action="" method="post" class="comment-form" novalidate>
+        {% csrf_token %}
+        {{ form | crispy }}
+        <input type="submit" value="Add comment" class="btn btn-dark">
+      </form>
+    {% else %}
+      <a href="{% url "login" %}">Login first</a>
+    {% endif %}
+  </div>
 
 {% endblock %}

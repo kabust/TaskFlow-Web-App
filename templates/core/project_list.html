@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+  {% if project_list %}
   <table class="table">
     <tr>
       <th>Name</th>
@@ -29,4 +30,7 @@
       </tr>
     {% endfor %}
   </table>
+  {% else %}
+  <p>No projects to show</p>
+  {% endif %}
 {% endblock %}

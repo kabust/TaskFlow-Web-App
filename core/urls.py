@@ -12,7 +12,7 @@ from core.views import (
     TaskDeleteView,
     WorkerUpdateView,
     ProjectListView,
-    toggle_completed,
+    toggle_completed, delete_comment,
 )
 
 urlpatterns = [
@@ -22,6 +22,9 @@ urlpatterns = [
     path("task/<int:pk>/", TaskDetailView.as_view(), name="task-detail"),
     path(
         "task/<int:pk>/toggle-completed", toggle_completed, name="task-toggle-completed"
+    ),
+    path(
+        "task/<int:task_pk>/delete-comment/<int:com_pk>", delete_comment, name="task-delete-comment"
     ),
     path("task/create/", TaskCreateView.as_view(), name="task-create"),
     path("tasks/<int:pk>/update/", TaskUpdateView.as_view(), name="task-update"),

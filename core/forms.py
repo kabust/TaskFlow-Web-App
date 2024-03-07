@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 
-from core.models import Task, Project
+from core.models import Task, Project, Comment
 
 
 class WorkerCreateForm(UserCreationForm):
@@ -11,13 +11,17 @@ class WorkerCreateForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
-        fields = UserCreationForm.Meta.fields + ("first_name", "last_name", "email", "project")
+        fields = UserCreationForm.Meta.fields + ("first_name", "last_name", "email")
 
 
 class WorkerUpdateForm(UserChangeForm):
     username = forms.CharField(max_length=255, disabled=True, required=False)
     date_joined = forms.DateTimeField(disabled=True, required=False)
-    password = forms.CharField(disabled=True, required=False, initial="********")
+    password = forms.CharField(
+        disabled=True,
+        required=False,
+        widget=forms.HiddenInput()
+    )
 
     class Meta(UserChangeForm.Meta):
         model = get_user_model()
@@ -35,7 +39,6 @@ class TaskForm(forms.ModelForm):
     assignees = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
         widget=forms.CheckboxSelectMultiple,
-
     )
 
     def __init__(self, *args, **kwargs):
@@ -45,6 +48,7 @@ class TaskForm(forms.ModelForm):
         self.fields["assignees"].queryset = get_user_model().objects.filter(
             project=users_project
         )
+        self.fields["assignees"].initial = self.instance
         self.fields["project"].required = True
         self.fields["project"].initial = Project.objects.get(worker=self.request.user)
         self.fields["project"].disabled = True
@@ -74,3 +78,10 @@ class TaskFiltersSearch(forms.Form):
         label="",
         widget=forms.CheckboxSelectMultiple,
     )
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ("content", "task", "commentator")
+        widgets = {"task": forms.HiddenInput(), "commentator": forms.HiddenInput()}
