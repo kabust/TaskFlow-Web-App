@@ -29,7 +29,7 @@ SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 DEBUG = "RENDER" not in os.environ
 
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1", "https://taskflow-6pzs.onrender.com"]
 
 # Application definition
 
