@@ -116,7 +116,7 @@ def delete_comment(
     task_project = Task.objects.get(pk=task_pk).project
     if (request.user != comment.commentator or
             request.user.project != task_project):
-        return HttpResponse("Unauthorized", status=403)
+        return HttpResponse("Unauthorized", status=401)
     comment.delete()
     return HttpResponseRedirect(reverse("core:task-detail", args=(task_pk,)))
 
@@ -153,7 +153,7 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
 
         if (not self.request.user.project or
                 obj.project != self.request.user.project):
-            return HttpResponse("Unauthorized", status=403)
+            return HttpResponse("Unauthorized", status=401)
 
         return super().get(request, *args, **kwargs)
 
@@ -174,7 +174,7 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
 
         if (not self.request.user.project or
                 obj.project != self.request.user.project):
-            return HttpResponse("Unauthorized", status=403)
+            return HttpResponse("Unauthorized", status=401)
 
         return super().get(request, *args, **kwargs)
 
@@ -196,7 +196,7 @@ def toggle_completed(
         task.is_completed = not task.is_completed
         task.save()
     else:
-        return HttpResponse("Unauthorized", status=403)
+        return HttpResponse("Unauthorized", status=401)
 
     return HttpResponseRedirect(reverse("core:task-detail", args=(pk,)))
 
