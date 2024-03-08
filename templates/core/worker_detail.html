@@ -18,7 +18,7 @@
     <div class="user-profile-info">
       <p>{{ worker.first_name }} {{ worker.last_name }}</p>
       <p><a href="mailto:{{ worker.email }}">{{ worker.email }}</a></p>
-      <p>Current project: <a href="{% url "core:task-list" worker.project.id %}">{{ worker.project }}</a></p>
+      <p>Current project: <a href="{% url "core:task-list" %}?project_id={{ worker.project.id }}">{{ worker.project }}</a></p>
       <hr>
       <p>All tasks:</p>
       {% if worker.tasks.all %}
