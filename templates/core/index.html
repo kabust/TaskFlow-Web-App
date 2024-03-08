@@ -6,7 +6,11 @@
 
 {% block content %}
   <h1>Welcome to TaskFlow manager panel!</h1>
-  <h3>Your current project: <a href="{% url "core:task-list" %}?project_id={{ user.project.id }}">{{ user.project }}</a></h3>
+  {% if user.project %}
+    <h3>Your current project: <a href="{% url "core:task-list" %}?project_id={{ user.project.id }}">{{ user.project }}</a></h3>
+  {% else %}
+    <h3>You are not participating in any projects</h3>
+  {% endif %}
   <hr>
   <div class="container-fluid home">
     <div>
