@@ -19,15 +19,15 @@ from core.views import (
 urlpatterns = [
     path("", index, name="index"),
     path("projects/", ProjectListView.as_view(), name="project-list"),
-    path("projects/<int:pk>/tasks/", TaskListView.as_view(), name="task-list"),
+    path("tasks/", TaskListView.as_view(), name="task-list"),
     path("task/<int:pk>/", TaskDetailView.as_view(), name="task-detail"),
     path(
-        "task/<int:pk>/toggle-completed",
+        "task/<int:pk>/toggle-completed/",
         toggle_completed,
         name="task-toggle-completed"
     ),
     path(
-        "task/<int:task_pk>/delete-comment/<int:com_pk>",
+        "task/<int:task_pk>/delete-comment/<int:com_pk>/",
         delete_comment,
         name="task-delete-comment",
     ),

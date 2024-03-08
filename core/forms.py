@@ -87,6 +87,12 @@ class TaskFiltersSearch(forms.Form):
         label="",
         widget=forms.CheckboxSelectMultiple,
     )
+    project_id = forms.ModelChoiceField(
+        queryset=Project.objects.all(),
+        label="",
+        required=True,
+        empty_label=None,
+    )
 
 
 class CommentForm(forms.ModelForm):

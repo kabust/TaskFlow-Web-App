@@ -14,7 +14,7 @@
     </tr>
     {% for project in project_list %}
       <tr>
-        <td><a href="{% url "core:task-list" project.id %}">{{ project }}</a>
+        <td><a href="{% url "core:task-list" %}?project_id={{ project.id }}">{{ project }}</a>
           {% if project.id == users_project %}
             (My project)
           {% endif %}

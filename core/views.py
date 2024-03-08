@@ -55,7 +55,7 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         queryset = Task.objects.prefetch_related("assignees")
-        project_id = self.request.build_absolute_uri().split("/")[4]
+        project_id = self.request.GET.get("project_id")
         queryset = queryset.filter(project_id=project_id)
         filters = self.request.GET.getlist("filters")
 
@@ -74,10 +74,9 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        project_id = self.request.build_absolute_uri().split("/")[4]
-
+        project_id = self.request.GET.get("project_id")
         filters = self.request.GET.getlist("filters")
-        context["filters"] = TaskFiltersSearch(initial={"filters": filters})
+        context["filters"] = TaskFiltersSearch(initial={"filters": filters, "project_id": project_id})
         context["project"] = Project.objects.get(id=project_id)
 
         return context
@@ -117,7 +116,7 @@ def delete_comment(
     task_project = Task.objects.get(pk=task_pk).project
     if (request.user != comment.commentator or
             request.user.project != task_project):
-        return HttpResponse("Unauthorized", status=405)
+        return HttpResponse("Unauthorized", status=403)
     comment.delete()
     return HttpResponseRedirect(reverse("core:task-detail", args=(task_pk,)))
 
@@ -154,7 +153,7 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
 
         if (not self.request.user.project or
                 obj.project != self.request.user.project):
-            return HttpResponse("Unauthorized", status=405)
+            return HttpResponse("Unauthorized", status=403)
 
         return super().get(request, *args, **kwargs)
 
@@ -175,7 +174,7 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
 
         if (not self.request.user.project or
                 obj.project != self.request.user.project):
-            return HttpResponse("Unauthorized", status=405)
+            return HttpResponse("Unauthorized", status=403)
 
         return super().get(request, *args, **kwargs)
 
@@ -197,7 +196,7 @@ def toggle_completed(
         task.is_completed = not task.is_completed
         task.save()
     else:
-        return HttpResponse("Unauthorized", status=405)
+        return HttpResponse("Unauthorized", status=403)
 
     return HttpResponseRedirect(reverse("core:task-detail", args=(pk,)))
 
