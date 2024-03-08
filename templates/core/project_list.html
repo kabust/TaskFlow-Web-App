@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block header %}
+  <p>Projects</p>
+{% endblock %}
+
+{% block content %}
+  {% if project_list %}
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Project Managers</th>
+      <th>Amount of workers</th>
+    </tr>
+    {% for project in project_list %}
+      <tr>
+        <td><a href="{% url "core:task-list" %}?project_id={{ project.id }}">{{ project }}</a>
+          {% if project.id == users_project %}
+            (My project)
+          {% endif %}
+        </td>
+        <td>
+          {% for project_manager in project.get_project_managers %}
+            <a href="{% url "core:worker-detail" project_manager.id %}" class="btn btn-light btn-circle btn-xl">
+              {{ project_manager.first_name|slice:"1" }}{{ project_manager.last_name|slice:"1" }}
+            </a>
+          {% endfor %}
+        </td>
+        <td>{{ project.get_all_workers.count }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>No projects to show</p>
+  {% endif %}
+{% endblock %}

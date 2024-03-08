@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block header %}
+  <p>Tasks in "{{ project }}"</p>
+{% endblock %}
+
+{% block content %}
+  <div class="flex-container">
+    <form action="" method="get" class="form-inline" novalidate>
+      {{ filters }}
+      <input type="submit" value="&#x1F50E;&#xFE0E;" class="btn btn-light">
+    </form>
+    {% if request.user in project.get_all_workers %}
+      <a href="{% url "core:task-create" %}" class="btn btn-primary">New task</a>
+    {% endif %}
+  </div>
+  <br>
+  {% if task_list %}
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Deadline</th>
+        <th>Assignees</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+      {% for task in task_list %}
+        {% if task.is_completed %}
+        <tr class="task-done">
+          <td>✅ <a href="{% url 'core:task-detail' task.id %}" class="task-done">{{ task.name }}</a></td>
+          <td>{{ task.deadline }}</td>
+          <td>
+          {% for assignee in task.assignees.all %}
+            <a href="{% url "core:worker-detail" assignee.id %}" class="btn btn-light btn-circle btn-xl">
+              {{ assignee.first_name|slice:"1" }}{{ assignee.last_name|slice:"1" }}
+            </a>
+          {% endfor %}
+          <td><a href="{% url "core:task-update" task.id %}" class="btn btn-secondary">Update</a></td>
+          <td><a href="{% url "core:task-delete" task.id %}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        {% else %}
+          <tr>
+            <td><a href="{% url 'core:task-detail' task.id %}">{{ task.name }}</a></td>
+            <td {% if task.past_deadline %} style="color: red" {% endif %}>{{ task.deadline }}</td>
+            <td>
+            {% for assignee in task.assignees.all %}
+              <a href="{% url "core:worker-detail" assignee.id %}" class="btn btn-light btn-circle btn-xl">
+                {{ assignee.first_name|slice:"1" }}{{ assignee.last_name|slice:"1" }}
+              </a>
+            {% endfor %}
+          {% if request.user in task.project.get_all_workers %}
+            <td><a href="{% url "core:task-update" task.id %}" class="btn btn-secondary">Update</a></td>
+            <td><a href="{% url "core:task-delete" task.id %}" class="btn btn-danger">Delete</a></td>
+          {% else %}
+            <td><button type="button" class="btn btn-secondary" disabled>Update</button></td>
+            <td><button type="button" class="btn btn-danger" disabled>Delete</button></td>
+          {% endif %}
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>There are no tasks to show</p>
+  {% endif %}
+{% endblock %}

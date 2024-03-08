@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block header %}
+  <p>Workers</p>
+{% endblock %}
+
+{% block content %}
+  <form action="" method="get" class="form-inline searchbar">
+    {{ search_form|crispy }}
+    <input type="submit" value="&#x1F50E;&#xFE0E;" class="btn btn-light">
+  </form>
+  <h2>Members ({{ num_workers }})</h2>
+  <br>
+  {% if worker_list %}
+    <div class="table-div w-75">
+      <table class="table">
+        <tr class="table-header">
+          <th>Name</th>
+          <th>Position</th>
+          <th>Email</th>
+        </tr>
+        {% for worker in worker_list %}
+          <tr>
+            <td><a href="{% url "core:worker-detail" worker.id %}">{{ worker.first_name }} {{ worker.last_name }}</a></td>
+            <td>{% if worker.position %} {{ worker.position }} {% else %} - {% endif %}</td>
+            <td><a href="mailto:{{ worker.email }}">{{ worker.email }}</a></td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  {% else %}
+    <p>There are no workers to show</p>
+  {% endif %}
+{% endblock %}

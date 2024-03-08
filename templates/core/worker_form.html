@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block header %}
+  <p>{% if object %} Edit your profile {% else %} Registration {% endif %}</p>
+{% endblock %}
+
+{% block content %}
+  <form action="" method="post" novalidate>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Submit" class="btn btn-primary">
+    <a href="{{ previous_url }}" class="btn btn-secondary">Cancel</a>
+  </form>
+{% endblock %}

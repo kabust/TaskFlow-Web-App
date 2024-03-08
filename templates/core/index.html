@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block header %}
+  <p>Home</p>
+{% endblock %}
+
+{% block content %}
+  <h1>Welcome to TaskFlow manager panel!</h1>
+  {% if user.project %}
+    <h3>Your current project: <a href="{% url "core:task-list" %}?project_id={{ user.project.id }}">{{ user.project }}</a></h3>
+  {% else %}
+    <h3>You are not participating in any projects</h3>
+  {% endif %}
+  <hr>
+  <div class="container-fluid home">
+    <div>
+      <p>You have {{ workers_amount }} colleagues working on this project</p>
+      <p>There are {{ tasks_todo_amount }} tasks to do in your project</p>
+      <p>Your team finished {{ tasks_done }} task{{ tasks_done|pluralize }} so far</p>
+    </div>
+    {% if not daily_refresher %}
+      <div class="line"></div>
+      <div class>
+        <p>Welcome back! Long time no see</p>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
