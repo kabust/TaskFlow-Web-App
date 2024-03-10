@@ -13,6 +13,7 @@ Python3 must be already installed
 ```shell
 git clone https://github.com/kabust/TaskFlow-Web-App.git
 cd TaskFlow-Web-App
+git switch develop
 python3 -m venv venv
 pip install -r requirements.txt
 python manage.py runserver
