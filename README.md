@@ -6,6 +6,11 @@ Web application IT company task manager which allows to track task, deadlines, a
 
 [TaskFlow Manager App](https://taskflow-6pzs.onrender.com)
 
+<i>If you don't want to register you can use following credentials:</i>
+
+* <i>Login: tester</i>
+* <i>Password: Sandbox!1</i>
+
 ## Installing / Getting started
 
 Python3 must be already installed
@@ -13,13 +18,12 @@ Python3 must be already installed
 ```shell
 git clone https://github.com/kabust/TaskFlow-Web-App.git
 cd TaskFlow-Web-App
-git switch develop
 python3 -m venv venv
 pip install -r requirements.txt
 python manage.py runserver
 ```
 
-After running that code you'll be able to browse the website locally on your computer
+After running that code you'll be able to browse the website locally on your computer.
 
 ### Features
 
@@ -28,7 +32,6 @@ After running that code you'll be able to browse the website locally on your com
 * Following tasks deadlines and assignees
 * Filtering and searching
 * Admin panel for advanced DB management
-
 
 ## Demo
 ![Website Interface](demo.png)
