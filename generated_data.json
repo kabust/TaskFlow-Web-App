@@ -540,6 +540,26 @@
     }
   },
   {
+    "model": "core.worker",
+    "pk": 21,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Sd2EyrEHvxfTgqbWMcKVZU$8cTvUFOY4aHajwFZqYibeN+Lg4Q8fj9t1AsXOvJVlhs=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "tester",
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john_doe@it-manager.com",
+      "position": 2,
+      "project": 1,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
     "model": "core.task",
     "pk": 1,
     "fields": {
@@ -563,13 +583,14 @@
     "fields": {
       "name": "Cloud Migration Planning",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "deadline": "2024-02-28",
+      "deadline": "2024-04-28",
       "is_completed": false,
       "priority": "High",
-      "project": 3,
+      "project": 1,
       "task_type": 2,
       "assignees": [
-        17
+        17,
+        21
       ]
     }
   },
@@ -768,7 +789,8 @@
       "project": 1,
       "task_type": 3,
       "assignees": [
-        3
+        3,
+        21
       ]
     }
   },
@@ -802,7 +824,8 @@
       "task_type": 3,
       "assignees": [
         10,
-        2
+        2,
+        21
       ]
     }
   },
