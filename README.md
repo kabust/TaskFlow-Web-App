@@ -14,7 +14,12 @@ pip install -r requirements.txt
 python manage.py runserver
 ```
 
-After running that code you'll be able to browse the website locally on your computer
+After running that code you'll be able to browse the website locally on your computer.
+
+<i>If you don't want to register you can use following credentials:</i>
+
+* <i>Login: tester</i>
+* <i>Password: Sandbox!1</i>
 
 ### Features
 
