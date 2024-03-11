@@ -136,7 +136,7 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
         return kwargs
 
     def get_success_url(self):
-        return reverse("core:task-list", args=(self.request.user.project.id,))
+        return reverse("core:task-list") + f"?project_id={self.request.user.project.id}"
 
 
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
@@ -158,7 +158,7 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
         return super().get(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse("core:task-list", args=(self.get_object().project.id,))
+        return reverse("core:task-list") + f"?project_id={self.request.user.project.id}"
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
