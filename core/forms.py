@@ -58,7 +58,7 @@ class TaskForm(forms.ModelForm):
         self.fields["assignees"].initial = self.instance
         self.fields["project"].required = True
         self.fields["project"].initial = Project.objects.get(
-            worker=self.request.user
+            workers=self.request.user
         )
         self.fields["project"].disabled = True
 
