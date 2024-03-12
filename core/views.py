@@ -218,7 +218,7 @@ class WorkerListView(LoginRequiredMixin, generic.ListView):
         context = super().get_context_data(**kwargs)
         name = self.request.GET.get("name", "")
         context["search_form"] = WorkerNameSearch(initial={"name": name})
-        context["num_workers"] = get_user_model().objects.count()
+        context["num_workers"] = self.get_queryset().count()
         return context
 
 
