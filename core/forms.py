@@ -75,6 +75,12 @@ class WorkerNameSearch(forms.Form):
         label="",
         widget=forms.TextInput(attrs={"placeholder": "Search"}),
     )
+    user_project = forms.ChoiceField(
+        choices=[("true", "My colleagues")],
+        required=False,
+        label="",
+        widget=forms.CheckboxSelectMultiple,
+    )
 
 
 class TaskFiltersSearch(forms.Form):

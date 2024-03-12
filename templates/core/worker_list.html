@@ -22,7 +22,11 @@
         </tr>
         {% for worker in worker_list %}
           <tr>
-            <td><a href="{% url "core:worker-detail" worker.id %}">{{ worker.first_name }} {{ worker.last_name }}</a></td>
+            <td><a href="{% url "core:worker-detail" worker.id %}">
+              {{ worker.first_name }} {{ worker.last_name }}
+            </a>
+              {% if request.user == worker %} (Me) {% endif %}
+            </td>
             <td>{% if worker.position %} {{ worker.position }} {% else %} - {% endif %}</td>
             <td><a href="mailto:{{ worker.email }}">{{ worker.email }}</a></td>
           </tr>

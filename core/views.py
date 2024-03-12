@@ -209,15 +209,20 @@ class WorkerListView(LoginRequiredMixin, generic.ListView):
         queryset = get_user_model().objects.all()
 
         if name:
-            return queryset.filter(
+            queryset = queryset.filter(
                 Q(first_name__icontains=name) | Q(last_name__icontains=name)
             )
+
+        if self.request.GET.get("user_project") == "true":
+            queryset = queryset.filter(project=self.request.user.project)
+
         return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         name = self.request.GET.get("name", "")
-        context["search_form"] = WorkerNameSearch(initial={"name": name})
+        user_project = self.request.GET.get("user_project", "")
+        context["search_form"] = WorkerNameSearch(initial={"name": name, "user_project": user_project})
         context["num_workers"] = self.get_queryset().count()
         return context
 
