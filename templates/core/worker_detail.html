@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block header %}
+  <div class="name-with-go-back">
+    <a href="{{ previous_url }}">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+        <path d="M7.82509 13.5L12.7251 18.4C12.9251 18.6 13.0211 18.8333 13.0131 19.1C13.0051 19.3667 12.9008 19.6 12.7001 19.8C12.5001 19.9833 12.2668 20.0793 12.0001 20.088C11.7334 20.0967 11.5001 20.0007 11.3001 19.8L4.70009 13.2C4.60009 13.1 4.52909 12.9917 4.48709 12.875C4.44509 12.7583 4.42475 12.6333 4.42609 12.5C4.42609 12.3667 4.44709 12.2417 4.48909 12.125C4.53109 12.0083 4.60142 11.9 4.70009 11.8L11.3001 5.19999C11.4834 5.01665 11.7128 4.92499 11.9881 4.92499C12.2634 4.92499 12.5008 5.01665 12.7001 5.19999C12.9001 5.39999 13.0001 5.63765 13.0001 5.91299C13.0001 6.18832 12.9001 6.42565 12.7001 6.62499L7.82509 11.5H19.0001C19.2834 11.5 19.5211 11.596 19.7131 11.788C19.9051 11.98 20.0008 12.2173 20.0001 12.5C20.0001 12.7833 19.9041 13.021 19.7121 13.213C19.5201 13.405 19.2828 13.5007 19.0001 13.5H7.82509Z" fill="white"></path>
+      </svg>
+    </a>
+    <p>
+      <p>{{ worker.username }} - {{ worker.position }}</p>
+    </p>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="user-profile-content">
+    <div class="user-profile-info">
+      <p>{{ worker.first_name }} {{ worker.last_name }}</p>
+      <p><a href="mailto:{{ worker.email }}">{{ worker.email }}</a></p>
+      <p>Current project: <a href="{% url "core:task-list" %}?project_id={{ worker.project.id }}">{{ worker.project }}</a></p>
+      <hr>
+      <p>All tasks:</p>
+      {% if worker.tasks.all %}
+        {% for task in worker.tasks.all %}
+              <a href="{% url "core:task-detail" task.id %}"
+                {% if task.is_completed %}
+                  style="color: green"
+                {% elif task.past_deadline %}
+                  style="color: red"
+                {% endif %}>
+                {{ task.name }}
+              </a>
+          <br>
+        {% endfor %}
+      {% else %}
+        <p>{{ worker.first_name }} doesn't have any tasks</p>
+      {% endif %}
+    </div>
+    {% if request.user.id == worker.id %}
+      <div class="user-profile-settings">
+        <a href="{% url "core:worker-update" request.user.id %}" class="btn btn-dark">Edit profile</a>
+        {% include "includes/logout_button.html" %}
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

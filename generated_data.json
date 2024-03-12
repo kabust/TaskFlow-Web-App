@@ -1,0 +1,901 @@
+[
+  {
+    "model": "core.tasktype",
+    "pk": 1,
+    "fields": {
+      "name": "Troubleshooting and Technical Support"
+    }
+  },
+  {
+    "model": "core.tasktype",
+    "pk": 2,
+    "fields": {
+      "name": "Network Administration"
+    }
+  },
+  {
+    "model": "core.tasktype",
+    "pk": 3,
+    "fields": {
+      "name": "Incident Management"
+    }
+  },
+  {
+    "model": "core.tasktype",
+    "pk": 4,
+    "fields": {
+      "name": "Database Management"
+    }
+  },
+  {
+    "model": "core.tasktype",
+    "pk": 5,
+    "fields": {
+      "name": "Cybersecurity Management"
+    }
+  },
+  {
+    "model": "core.tasktype",
+    "pk": 6,
+    "fields": {
+      "name": "Performance Monitoring"
+    }
+  },
+  {
+    "model": "core.tasktype",
+    "pk": 7,
+    "fields": {
+      "name": "User Experience (UX) Evaluation"
+    }
+  },
+  {
+    "model": "core.tasktype",
+    "pk": 8,
+    "fields": {
+      "name": "Training and Knowledge Management"
+    }
+  },
+  {
+    "model": "core.position",
+    "pk": 1,
+    "fields": {
+      "name": "Software Developer"
+    }
+  },
+  {
+    "model": "core.position",
+    "pk": 2,
+    "fields": {
+      "name": "Systems Administrator"
+    }
+  },
+  {
+    "model": "core.position",
+    "pk": 3,
+    "fields": {
+      "name": "Network Engineer"
+    }
+  },
+  {
+    "model": "core.position",
+    "pk": 4,
+    "fields": {
+      "name": "Database Administrator"
+    }
+  },
+  {
+    "model": "core.position",
+    "pk": 5,
+    "fields": {
+      "name": "Project Manager"
+    }
+  },
+  {
+    "model": "core.position",
+    "pk": 6,
+    "fields": {
+      "name": "Cybersecurity Analyst"
+    }
+  },
+  {
+    "model": "core.position",
+    "pk": 7,
+    "fields": {
+      "name": "Data Scientist"
+    }
+  },
+  {
+    "model": "core.position",
+    "pk": 8,
+    "fields": {
+      "name": "UX/UI Designer"
+    }
+  },
+  {
+    "model": "core.position",
+    "pk": 9,
+    "fields": {
+      "name": "IT Support Specialist"
+    }
+  },
+  {
+    "model": "core.project",
+    "pk": 1,
+    "fields": {
+      "name": "Restaurant API"
+    }
+  },
+  {
+    "model": "core.project",
+    "pk": 2,
+    "fields": {
+      "name": "Newspaper Agency Design"
+    }
+  },
+  {
+    "model": "core.project",
+    "pk": 3,
+    "fields": {
+      "name": "Telegram Bot"
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "luella.buck1",
+      "first_name": "Luella",
+      "last_name": "Buck",
+      "email": "luella_buck@it-manager.com",
+      "position": 6,
+      "project": 1,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "macy.roy2",
+      "first_name": "Macy",
+      "last_name": "Roy",
+      "email": "macy_roy@it-manager.com",
+      "position": 2,
+      "project": 1,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "luella.jeffers3",
+      "first_name": "Luella",
+      "last_name": "Jeffers",
+      "email": "luella_jeffers@it-manager.com",
+      "position": 9,
+      "project": 1,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "luella.jeffers4",
+      "first_name": "Luella",
+      "last_name": "Jeffers",
+      "email": "luella_jeffers@it-manager.com",
+      "position": 4,
+      "project": 2,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "kourtney.jeffers5",
+      "first_name": "Kourtney",
+      "last_name": "Jeffers",
+      "email": "kourtney_jeffers@it-manager.com",
+      "position": 2,
+      "project": 2,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "antony.buck2",
+      "first_name": "Antony",
+      "last_name": "Buck",
+      "email": "antony_buck@it-manager.com",
+      "position": 5,
+      "project": 1,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 7,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "kahlil.buck4",
+      "first_name": "Kahlil",
+      "last_name": "Buck",
+      "email": "kahlil_buck@it-manager.com",
+      "position": 6,
+      "project": 2,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 8,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "luella.mccloud1",
+      "first_name": "Luella",
+      "last_name": "Mccloud",
+      "email": "luella_mccloud@it-manager.com",
+      "position": 8,
+      "project": 3,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 9,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "luella.buck7",
+      "first_name": "Luella",
+      "last_name": "Buck",
+      "email": "luella_buck@it-manager.com",
+      "position": 5,
+      "project": 3,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 10,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "rashawn.mccloud8",
+      "first_name": "Rashawn",
+      "last_name": "Mccloud",
+      "email": "rashawn_mccloud@it-manager.com",
+      "position": 7,
+      "project": 3,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 11,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "lillianna.jeffers6",
+      "first_name": "Lillianna",
+      "last_name": "Jeffers",
+      "email": "lillianna_jeffers@it-manager.com",
+      "position": 1,
+      "project": 2,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 12,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "kourtney.fisher5",
+      "first_name": "Kourtney",
+      "last_name": "Fisher",
+      "email": "kourtney_fisher@it-manager.com",
+      "position": 1,
+      "project": 3,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 13,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "macy.roy",
+      "first_name": "Macy",
+      "last_name": "Roy",
+      "email": "macy_roy@it-manager.com",
+      "position": 5,
+      "project": 2,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 14,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "lillianna.roy0",
+      "first_name": "Lillianna",
+      "last_name": "Roy",
+      "email": "lillianna_roy@it-manager.com",
+      "position": 8,
+      "project": 3,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 15,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "lillianna.jeffers9",
+      "first_name": "Lillianna",
+      "last_name": "Jeffers",
+      "email": "lillianna_jeffers@it-manager.com",
+      "position": 8,
+      "project": 1,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 16,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "heath.jeffers2",
+      "first_name": "Heath",
+      "last_name": "Jeffers",
+      "email": "heath_jeffers@it-manager.com",
+      "position": 3,
+      "project": 3,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 17,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "heath.walter3",
+      "first_name": "Heath",
+      "last_name": "Walter",
+      "email": "heath_walter@it-manager.com",
+      "position": 9,
+      "project": 1,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 18,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "lillianna.walter19",
+      "first_name": "Lillianna",
+      "last_name": "Walter",
+      "email": "lillianna_walter@it-manager.com",
+      "position": 6,
+      "project": 1,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 19,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "antony.jarvis23",
+      "first_name": "Antony",
+      "last_name": "Jarvis",
+      "email": "antony_jarvis@it-manager.com",
+      "position": 6,
+      "project": 3,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 20,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$9yU0PLTDKlL02PedUtk2l2$LKjj8O1xGiPGEkDpjsHk87db1iLgt8dgDqECzcsivio",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "luella.jarvis11",
+      "first_name": "Luella",
+      "last_name": "Jarvis",
+      "email": "luella_jarvis@it-manager.com",
+      "position": 2,
+      "project": 1,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.worker",
+    "pk": 21,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Sd2EyrEHvxfTgqbWMcKVZU$8cTvUFOY4aHajwFZqYibeN+Lg4Q8fj9t1AsXOvJVlhs=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "tester",
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john_doe@it-manager.com",
+      "position": 2,
+      "project": 1,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-08-09T14:19:09Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 1,
+    "fields": {
+      "name": "Vulnerability Scanning and Remediation",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-03-10",
+      "is_completed": true,
+      "priority": "Medium",
+      "project": 1,
+      "task_type": 6,
+      "assignees": [
+        7,
+        8,
+        19
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 2,
+    "fields": {
+      "name": "Cloud Migration Planning",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-04-28",
+      "is_completed": false,
+      "priority": "High",
+      "project": 1,
+      "task_type": 2,
+      "assignees": [
+        17,
+        21
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 3,
+    "fields": {
+      "name": "IT Asset Inventory Management",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-03-10",
+      "is_completed": true,
+      "priority": "Medium",
+      "project": 3,
+      "task_type": 1,
+      "assignees": [
+        17
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 4,
+    "fields": {
+      "name": "Software Patching and Updates",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-04-01",
+      "is_completed": false,
+      "priority": "High",
+      "project": 2,
+      "task_type": 2,
+      "assignees": [
+        3
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 5,
+    "fields": {
+      "name": "Network Traffic Analysis",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-03-10",
+      "is_completed": false,
+      "priority": "High",
+      "project": 3,
+      "task_type": 8,
+      "assignees": [
+        3
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 6,
+    "fields": {
+      "name": "Software Patching and Updates",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-03-05",
+      "is_completed": true,
+      "priority": "Urgent",
+      "project": 2,
+      "task_type": 8,
+      "assignees": [
+        16,
+        6
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 7,
+    "fields": {
+      "name": "Data Encryption Implementation",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-03-05",
+      "is_completed": true,
+      "priority": "Medium",
+      "project": 1,
+      "task_type": 2,
+      "assignees": [
+        19,
+        9
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 8,
+    "fields": {
+      "name": "Penetration Testing",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-03-15",
+      "is_completed": false,
+      "priority": "High",
+      "project": 1,
+      "task_type": 5,
+      "assignees": [
+        16,
+        6
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 9,
+    "fields": {
+      "name": "Software Patching and Updates",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-04-01",
+      "is_completed": true,
+      "priority": "High",
+      "project": 3,
+      "task_type": 3,
+      "assignees": [
+        18
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 10,
+    "fields": {
+      "name": "IT Asset Inventory Management",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-03-15",
+      "is_completed": false,
+      "priority": "Medium",
+      "project": 2,
+      "task_type": 2,
+      "assignees": [
+        17
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 11,
+    "fields": {
+      "name": "Data Encryption Implementation",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-04-01",
+      "is_completed": true,
+      "priority": "Medium",
+      "project": 1,
+      "task_type": 5,
+      "assignees": [
+        19,
+        15
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 12,
+    "fields": {
+      "name": "Software Patching and Updates",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-03-10",
+      "is_completed": false,
+      "priority": "Medium",
+      "project": 2,
+      "task_type": 5,
+      "assignees": [
+        12,
+        18,
+        17
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 13,
+    "fields": {
+      "name": "Penetration Testing",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-03-05",
+      "is_completed": false,
+      "priority": "Low",
+      "project": 3,
+      "task_type": 3,
+      "assignees": [
+        19,
+        9
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 14,
+    "fields": {
+      "name": "Data Encryption Implementation",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-02-28",
+      "is_completed": false,
+      "priority": "High",
+      "project": 1,
+      "task_type": 3,
+      "assignees": [
+        3,
+        21
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 15,
+    "fields": {
+      "name": "Network Traffic Analysis",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-02-28",
+      "is_completed": false,
+      "priority": "Urgent",
+      "project": 1,
+      "task_type": 5,
+      "assignees": [
+        10,
+        5
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 16,
+    "fields": {
+      "name": "Network Traffic Analysis",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-04-01",
+      "is_completed": true,
+      "priority": "Medium",
+      "project": 1,
+      "task_type": 3,
+      "assignees": [
+        10,
+        2,
+        21
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 17,
+    "fields": {
+      "name": "IT Asset Inventory Management",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-04-01",
+      "is_completed": false,
+      "priority": "High",
+      "project": 2,
+      "task_type": 3,
+      "assignees": [
+        19,
+        15
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 18,
+    "fields": {
+      "name": "Data Encryption Implementation",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-03-15",
+      "is_completed": true,
+      "priority": "Low",
+      "project": 1,
+      "task_type": 6,
+      "assignees": [
+        13,
+        18,
+        17
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 19,
+    "fields": {
+      "name": "Penetration Testing",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-03-10",
+      "is_completed": true,
+      "priority": "Medium",
+      "project": 1,
+      "task_type": 1,
+      "assignees": [
+        19,
+        15
+      ]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 20,
+    "fields": {
+      "name": "Cloud Migration Planning",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "deadline": "2024-03-15",
+      "is_completed": false,
+      "priority": "Low",
+      "project": 2,
+      "task_type": 5,
+      "assignees": [
+        1,
+        3
+      ]
+    }
+  }
+]
