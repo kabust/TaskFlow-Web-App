@@ -11,7 +11,7 @@ Web application IT company task manager which allows to track task, deadlines, a
 * <i>Login: tester</i>
 * <i>Password: Sandbox!1</i>
 
-## Installing / Getting started
+## Installing locally / Getting started
 
 Python3 must be already installed
 
@@ -20,6 +20,8 @@ git clone https://github.com/kabust/TaskFlow-Web-App.git
 cd TaskFlow-Web-App
 python3 -m venv venv
 pip install -r requirements.txt
+python manage.py migrate
+python manage.py loaddata generated_data.json
 python manage.py runserver
 ```
 
