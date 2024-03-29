@@ -5,6 +5,8 @@ Web application IT company task manager which allows to track task, deadlines, a
 ## Check it out!
 
 [TaskFlow Manager App](https://taskflow-6pzs.onrender.com)
+<br>
+(You would need to wait for ~1 minute for the server to wake up)
 
 <i>If you don't want to register you can use following credentials:</i>
 
