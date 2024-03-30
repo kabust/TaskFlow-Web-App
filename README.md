@@ -1,6 +1,6 @@
 # TaskFlow Manager
 
-Web application IT company task manager which allows to track task, deadlines, assignees and projects
+Web application IT company task manager which allows to track tasks, deadlines, assignees, and projects
 
 ## Check it out!
 
@@ -8,7 +8,7 @@ Web application IT company task manager which allows to track task, deadlines, a
 <br>
 (You would need to wait for ~1 minute for the server to wake up)
 
-<i>If you don't want to register you can use following credentials:</i>
+<i>If you don't want to register you can use the following credentials:</i>
 
 * <i>Login: tester</i>
 * <i>Password: Sandbox!1</i>
